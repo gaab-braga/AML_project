@@ -1,0 +1,63 @@
+# ========================================================================
+# AML Pipeline Requirements - Consolidated (2025)
+# Versões otimizadas para máximo desempenho e compatibilidade
+# ========================================================================
+
+# === CORE DATA SCIENCE ===
+numpy>=1.26.0,<2.0.0          # Performance numérica otimizada
+pandas>=2.1.0,<3.0.0          # DataFrame processing avançado
+scikit-learn>=1.4.0,<2.0.0    # Machine learning algorithms
+
+# === NUMERICAL COMPUTATION ===
+scipy>=1.12.0                 # Scientific computing
+numba>=0.59.0                 # JIT compilation
+joblib>=1.3.2                 # Parallel processing
+
+# === MACHINE LEARNING ===
+imbalanced-learn>=0.12.0      # Class balancing techniques
+optuna>=3.5.0                 # Hyperparameter optimization
+lightgbm>=4.1.0               # Gradient boosting
+xgboost>=2.0.0                # XGBoost algorithms
+
+# === INTERPRETABILITY ===
+shap>=0.44.0                  # Model explainability
+
+# === VISUALIZATION & DASHBOARD ===
+matplotlib>=3.8.0             # Base plotting
+plotly>=5.17.0                # Interactive charts
+streamlit>=1.29.0             # Web dashboard
+
+# === GRAPH & NETWORK ANALYSIS ===
+networkx>=3.2.0               # Graph algorithms
+
+# === UTILITIES ===
+pyyaml>=6.0.1                 # Configuration files
+tqdm>=4.66.0                  # Progress bars
+schedule>=1.2.0               # Job scheduling
+
+# === DEVELOPMENT ===
+jupyter>=1.0.0                # Notebook environment
+ipywidgets>=8.1.0             # Interactive widgets
+click>=8.1.0                  # Command-line interface framework
+rich>=13.7.0                  # Rich text and beautiful formatting
+streamlit>=1.29.0             # Web dashboard framework
+
+# === WEB API ===
+fastapi>=0.104.0              # High-performance API framework
+uvicorn[standard]>=0.24.0     # ASGI server
+redis>=5.0.0                  # Redis client for caching
+prometheus-fastapi-instrumentator>=2.0.0  # Prometheus metrics
+
+# === SECURITY ===
+PyJWT>=2.8.0                  # JWT token handling
+bcrypt>=4.1.0                 # Password hashing
+cryptography>=42.0.0          # Encryption utilities
+python-dotenv>=1.0.0          # Environment variables
+
+# === TESTING ===
+pytest>=7.4.0                  # Testing framework
+pytest-cov>=4.1.0             # Coverage reporting
+
+# ========================================================================
+# INSTALLATION: pip install -r requirements.txt --upgrade
+# ========================================================================

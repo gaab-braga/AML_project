@@ -1,0 +1,26 @@
+data:
+  path: "data/"
+
+preprocessing:
+  categorical_cols: ["payment_format"]
+
+features:
+  windows: [7, 30]
+
+model:
+  model: "xgb"
+  params:
+    n_estimators: 100
+    max_depth: 6
+
+validation:
+  cv_folds: 5
+  temporal_split: true
+
+output:
+  model_path: "models/aml_model.pkl"
+  metadata_path: "models/metadata.yaml"
+
+aml_config:
+  recall_threshold: 0.8  # For compliance, prioritize recall
+  top_k_percent: 0.01  # Evaluate recall at top 1%

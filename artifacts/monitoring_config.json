@@ -1,0 +1,18 @@
+{
+  "daily_metrics": {
+    "total_predictions": 0,
+    "fraud_alerts": 0,
+    "investigation_rate": 0,
+    "false_positive_rate": 0
+  },
+  "weekly_metrics": {
+    "model_drift_score": 0,
+    "feature_drift_score": 0,
+    "performance_degradation": 0
+  },
+  "alerts": {
+    "drift_threshold": 0.1,
+    "performance_drop_threshold": 0.05,
+    "retraining_trigger": "weekly_performance_drop > 0.05"
+  }
+}

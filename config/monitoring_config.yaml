@@ -1,0 +1,90 @@
+alerts:
+  channels:
+    email:
+      enabled: true
+      recipients:
+      - ml-team@company.com
+      - ops@company.com
+      sender: aml-monitoring@company.com
+      smtp_port: 587
+      smtp_server: smtp.company.com
+    pagerduty:
+      enabled: false
+      integration_key: your-pagerduty-key
+    slack:
+      channel: '#aml-alerts'
+      enabled: false
+      webhook_url: https://hooks.slack.com/...
+  escalation:
+    critical:
+    - email
+    - slack
+    emergency:
+    - email
+    - slack
+    - pagerduty
+    warning:
+    - email
+drift_detection:
+  drift_threshold: 0.1
+  enabled: true
+  features_to_monitor:
+  - amount
+  - payment_format
+  - hour
+  - is_foreign
+  - account_age_days
+  - transaction_frequency
+  method: kolmogorov_smirnov
+  retraining_trigger_threshold: 0.2
+metrics:
+  data_quality:
+    data_drift_score:
+      alert_level: warning
+      description: Statistical drift from training distribution
+      threshold: 0.1
+    missing_data_rate:
+      alert_level: warning
+      description: Rate of missing values in input
+      threshold: 0.05
+  operational:
+    error_rate:
+      alert_level: critical
+      description: Prediction error rate
+      threshold: 0.01
+    latency_ms:
+      alert_level: warning
+      description: Average prediction latency
+      threshold: 100
+    throughput_per_second:
+      alert_level: warning
+      description: Predictions per second
+      threshold: 50
+  performance:
+    pr_auc:
+      alert_level: critical
+      description: Primary performance metric
+      threshold: 0.25
+    precision:
+      alert_level: warning
+      description: Precision at optimal threshold
+      threshold: 0.1
+    recall:
+      alert_level: warning
+      description: Recall at optimal threshold
+      threshold: 0.05
+model_health:
+  health_checks:
+    feature_distribution: true
+    model_loading: true
+    prediction_consistency: true
+  performance_baseline:
+    pr_auc: 0.306
+    precision: 0.15
+    recall: 0.08
+  version_tracking: true
+monitoring:
+  alerts_enabled: true
+  collection_interval: 300
+  enabled: true
+  retention_days: 90

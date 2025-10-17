@@ -1,0 +1,31 @@
+{
+  "creation_date": "2025-10-16T11:02:09.961942",
+  "total_transactions": 1000,
+  "splits": {
+    "train": {
+      "transactions": 613,
+      "fraud_rate": 0.0,
+      "period_start": "2022-09-01T00:00:00",
+      "period_end": "2022-09-01T00:17:00"
+    },
+    "validation": {
+      "transactions": 200,
+      "fraud_rate": 0.0,
+      "period_start": "2022-09-01T00:18:00",
+      "period_end": "2022-09-01T00:23:00"
+    },
+    "test": {
+      "transactions": 187,
+      "fraud_rate": 0.0,
+      "period_start": "2022-09-01T00:24:00",
+      "period_end": "2022-09-01T00:29:00"
+    }
+  },
+  "validation_results": {
+    "Ordem temporal Train < Val": true,
+    "Ordem temporal Val < Test": true,
+    "Sem sobreposi\u00e7\u00e3o Train-Val": true,
+    "Sem sobreposi\u00e7\u00e3o Val-Test": true,
+    "Contagem total correta": true
+  }
+}

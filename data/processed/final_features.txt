@@ -1,0 +1,13 @@
+Dest Account
+To Bank
+Payment Format
+Account
+DayOfWeek
+From Bank
+Amount Received
+Day
+Amount Paid
+From Bank_freq
+To Bank_freq
+Account_freq
+Dest Account_freq

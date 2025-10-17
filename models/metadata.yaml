@@ -1,0 +1,66 @@
+config:
+  aml_config:
+    recall_threshold: 0.8
+    top_k_percent: 0.01
+  data:
+    path: data/
+  features:
+    windows:
+    - 7
+    - 30
+  model:
+    model: xgb
+    params:
+      max_depth: 6
+      n_estimators: 100
+  output:
+    metadata_path: models/metadata.yaml
+    model_path: models/aml_model.pkl
+  preprocessing:
+    categorical_cols:
+    - payment_format
+  validation:
+    cv_folds: 5
+    temporal_split: true
+cv_results:
+  cv_scores:
+  - .nan
+  - .nan
+  - .nan
+  - .nan
+  - .nan
+  mean_score: !!python/object/apply:numpy.core.multiarray.scalar
+  - &id001 !!python/object/apply:numpy.dtype
+    args:
+    - f8
+    - false
+    - true
+    state: !!python/tuple
+    - 3
+    - <
+    - null
+    - null
+    - null
+    - -1
+    - -1
+    - 0
+  - !!binary |
+    AAAAAAAA+H8=
+  temporal: true
+data_info:
+  fraud_rate: 0.0001
+  n_features: 3
+  n_samples: 10000
+metrics:
+  pr_auc: !!python/object/apply:numpy.core.multiarray.scalar
+  - *id001
+  - !!binary |
+    cayL22gA4D8=
+  roc_auc: !!python/object/apply:numpy.core.multiarray.scalar
+  - *id001
+  - !!binary |
+    AAAAAAAA4D8=
+recall_top_k: !!python/object/apply:numpy.core.multiarray.scalar
+- *id001
+- !!binary |
+  AAAAAAAAAAA=

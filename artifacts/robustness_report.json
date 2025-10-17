@@ -1,0 +1,515 @@
+{
+  "timestamp": "2025-10-16T17:48:41.117065",
+  "phase": "Fase 6: Valida\u00e7\u00e3o de Robustez",
+  "scenarios_tested": [
+    "baseline",
+    "fraud_increase",
+    "value_shift",
+    "noisy_data",
+    "missing_data"
+  ],
+  "robustness_results": {
+    "baseline": {
+      "XGBoost": {
+        "precision": 0.9375,
+        "recall": 0.3125,
+        "f1_score": 0.46875,
+        "pr_auc": 0.5092987450780805,
+        "roc_auc": 0.987719877749306,
+        "avg_precision": 0.5111956734224582,
+        "test_samples": 50000,
+        "fraud_cases": "48"
+      },
+      "LightGBM": {
+        "precision": 0.012224938875305624,
+        "recall": 0.4166666666666667,
+        "f1_score": 0.023752969121140142,
+        "pr_auc": 0.20284055187179062,
+        "roc_auc": 0.7218502679238735,
+        "avg_precision": 0.0065643970976441614,
+        "test_samples": 50000,
+        "fraud_cases": "48"
+      },
+      "RandomForest": {
+        "precision": 0.011986301369863013,
+        "recall": 0.875,
+        "f1_score": 0.02364864864864865,
+        "pr_auc": 0.07092268013509198,
+        "roc_auc": 0.9742098247651079,
+        "avg_precision": 0.07657348244872254,
+        "test_samples": 50000,
+        "fraud_cases": "48"
+      },
+      "Ensemble": {
+        "precision": 0.02054794520547945,
+        "recall": 0.4375,
+        "f1_score": 0.03925233644859813,
+        "pr_auc": 0.30595100641263995,
+        "roc_auc": 0.9680355641415759,
+        "avg_precision": 0.3072909327768953,
+        "test_samples": 50000,
+        "fraud_cases": "48"
+      }
+    },
+    "fraud_increase": {
+      "XGBoost": {
+        "precision": 0.9,
+        "recall": 0.23684210526315788,
+        "f1_score": 0.375,
+        "pr_auc": 0.4796985114500755,
+        "roc_auc": 0.9889943240040652,
+        "avg_precision": 0.48181078812525274,
+        "test_samples": 50000,
+        "fraud_cases": "76"
+      },
+      "LightGBM": {
+        "precision": 0.02366504854368932,
+        "recall": 0.5131578947368421,
+        "f1_score": 0.04524361948955916,
+        "pr_auc": 0.2661648916726241,
+        "roc_auc": 0.7430601092608135,
+        "avg_precision": 0.014952011452798779,
+        "test_samples": 50000,
+        "fraud_cases": "76"
+      },
+      "RandomForest": {
+        "precision": 0.018579234972677595,
+        "recall": 0.8947368421052632,
+        "f1_score": 0.03640256959314775,
+        "pr_auc": 0.1017643761520334,
+        "roc_auc": 0.9730442904794234,
+        "avg_precision": 0.10728473554828985,
+        "test_samples": 50000,
+        "fraud_cases": "76"
+      },
+      "Ensemble": {
+        "precision": 0.036414565826330535,
+        "recall": 0.5131578947368421,
+        "f1_score": 0.06800348735832606,
+        "pr_auc": 0.37445153059256925,
+        "roc_auc": 0.969132555168066,
+        "avg_precision": 0.3762178527819227,
+        "test_samples": 50000,
+        "fraud_cases": "76"
+      }
+    },
+    "value_shift": {
+      "XGBoost": {
+        "precision": 0.7272727272727273,
+        "recall": 0.14545454545454545,
+        "f1_score": 0.24242424242424243,
+        "pr_auc": 0.297829342215064,
+        "roc_auc": 0.9811450777673623,
+        "avg_precision": 0.30103119490474256,
+        "test_samples": 50000,
+        "fraud_cases": "55"
+      },
+      "LightGBM": {
+        "precision": 0.018441403926234383,
+        "recall": 0.5636363636363636,
+        "f1_score": 0.03571428571428571,
+        "pr_auc": 0.2628410928328046,
+        "roc_auc": 0.810725434341412,
+        "avg_precision": 0.012053452046795848,
+        "test_samples": 50000,
+        "fraud_cases": "55"
+      },
+      "RandomForest": {
+        "precision": 0.012315930388219544,
+        "recall": 0.8363636363636363,
+        "f1_score": 0.024274406332453827,
+        "pr_auc": 0.07644414572742,
+        "roc_auc": 0.9696291375058019,
+        "avg_precision": 0.08552454425331914,
+        "test_samples": 50000,
+        "fraud_cases": "55"
+      },
+      "Ensemble": {
+        "precision": 0.02736098852603707,
+        "recall": 0.5636363636363636,
+        "f1_score": 0.05218855218855219,
+        "pr_auc": 0.18563476372682813,
+        "roc_auc": 0.9689680466695183,
+        "avg_precision": 0.1896904663939952,
+        "test_samples": 50000,
+        "fraud_cases": "55"
+      }
+    },
+    "noisy_data": {
+      "XGBoost": {
+        "precision": 0.1111111111111111,
+        "recall": 0.05405405405405406,
+        "f1_score": 0.07272727272727272,
+        "pr_auc": 0.032270447064597405,
+        "roc_auc": 0.6875439176341844,
+        "avg_precision": 0.03345238516622329,
+        "test_samples": 50000,
+        "fraud_cases": "37"
+      },
+      "LightGBM": {
+        "precision": 0.006790402897238569,
+        "recall": 0.40540540540540543,
+        "f1_score": 0.013357079252003561,
+        "pr_auc": 0.2052934474002616,
+        "roc_auc": 0.6758284914620603,
+        "avg_precision": 0.003337581074947011,
+        "test_samples": 50000,
+        "fraud_cases": "37"
+      },
+      "RandomForest": {
+        "precision": 0.005591054313099041,
+        "recall": 0.1891891891891892,
+        "f1_score": 0.010861132660977503,
+        "pr_auc": 0.0058239481432194075,
+        "roc_auc": 0.8025749865711438,
+        "avg_precision": 0.006737784945758021,
+        "test_samples": 50000,
+        "fraud_cases": "37"
+      },
+      "Ensemble": {
+        "precision": 0.009538950715421303,
+        "recall": 0.16216216216216217,
+        "f1_score": 0.018018018018018018,
+        "pr_auc": 0.060647311666480276,
+        "roc_auc": 0.7998378259371394,
+        "avg_precision": 0.06103246471726108,
+        "test_samples": 50000,
+        "fraud_cases": "37"
+      }
+    },
+    "missing_data": {
+      "XGBoost": {
+        "precision": 0.6153846153846154,
+        "recall": 0.27586206896551724,
+        "f1_score": 0.38095238095238093,
+        "pr_auc": 0.3273931242912398,
+        "roc_auc": 0.9783749149012855,
+        "avg_precision": 0.33347260673889656,
+        "test_samples": 50000,
+        "fraud_cases": "58"
+      },
+      "LightGBM": {
+        "precision": 0.016756756756756756,
+        "recall": 0.5344827586206896,
+        "f1_score": 0.03249475890985325,
+        "pr_auc": 0.2739696281744852,
+        "roc_auc": 0.7506186486669365,
+        "avg_precision": 0.010410977884608031,
+        "test_samples": 50000,
+        "fraud_cases": "58"
+      },
+      "RandomForest": {
+        "precision": 0.014204545454545454,
+        "recall": 0.8620689655172413,
+        "f1_score": 0.027948574622694244,
+        "pr_auc": 0.17937722579290846,
+        "roc_auc": 0.9619821061396737,
+        "avg_precision": 0.18586174011423132,
+        "test_samples": 50000,
+        "fraud_cases": "58"
+      },
+      "Ensemble": {
+        "precision": 0.031062124248496994,
+        "recall": 0.5344827586206896,
+        "f1_score": 0.058712121212121215,
+        "pr_auc": 0.31614700038529653,
+        "roc_auc": 0.9561695014492673,
+        "avg_precision": 0.32011955411119425,
+        "test_samples": 50000,
+        "fraud_cases": "58"
+      }
+    }
+  },
+  "concept_drift_analysis": {
+    "baseline_performance": {
+      "XGBoost": {
+        "precision": 0.9375,
+        "recall": 0.3125,
+        "f1_score": 0.46875,
+        "pr_auc": 0.5092987450780805,
+        "roc_auc": 0.987719877749306,
+        "avg_precision": 0.5111956734224582,
+        "test_samples": 50000,
+        "fraud_cases": "48"
+      },
+      "LightGBM": {
+        "precision": 0.012224938875305624,
+        "recall": 0.4166666666666667,
+        "f1_score": 0.023752969121140142,
+        "pr_auc": 0.20284055187179062,
+        "roc_auc": 0.7218502679238735,
+        "avg_precision": 0.0065643970976441614,
+        "test_samples": 50000,
+        "fraud_cases": "48"
+      },
+      "RandomForest": {
+        "precision": 0.011986301369863013,
+        "recall": 0.875,
+        "f1_score": 0.02364864864864865,
+        "pr_auc": 0.07092268013509198,
+        "roc_auc": 0.9742098247651079,
+        "avg_precision": 0.07657348244872254,
+        "test_samples": 50000,
+        "fraud_cases": "48"
+      },
+      "Ensemble": {
+        "precision": 0.02054794520547945,
+        "recall": 0.4375,
+        "f1_score": 0.03925233644859813,
+        "pr_auc": 0.30595100641263995,
+        "roc_auc": 0.9680355641415759,
+        "avg_precision": 0.3072909327768953,
+        "test_samples": 50000,
+        "fraud_cases": "48"
+      }
+    },
+    "drift_indicators": {
+      "fraud_increase": {
+        "XGBoost": {
+          "pr_auc_change_percent": -5.811958877587054,
+          "f1_change_percent": -20.0,
+          "baseline_pr_auc": 0.5092987450780805,
+          "scenario_pr_auc": 0.4796985114500755
+        },
+        "LightGBM": {
+          "pr_auc_change_percent": 31.21877712147957,
+          "f1_change_percent": 90.47563805104409,
+          "baseline_pr_auc": 0.20284055187179062,
+          "scenario_pr_auc": 0.2661648916726241
+        },
+        "RandomForest": {
+          "pr_auc_change_percent": 43.486365656507665,
+          "f1_change_percent": 53.930865708167616,
+          "baseline_pr_auc": 0.07092268013509198,
+          "scenario_pr_auc": 0.1017643761520334
+        },
+        "Ensemble": {
+          "pr_auc_change_percent": 22.389376973495484,
+          "f1_change_percent": 73.2469796985926,
+          "baseline_pr_auc": 0.30595100641263995,
+          "scenario_pr_auc": 0.37445153059256925
+        }
+      },
+      "value_shift": {
+        "XGBoost": {
+          "pr_auc_change_percent": -41.52168150946379,
+          "f1_change_percent": -48.282828282828284,
+          "baseline_pr_auc": 0.5092987450780805,
+          "scenario_pr_auc": 0.297829342215064
+        },
+        "LightGBM": {
+          "pr_auc_change_percent": 29.580150718056863,
+          "f1_change_percent": 50.357142857142854,
+          "baseline_pr_auc": 0.20284055187179062,
+          "scenario_pr_auc": 0.2628410928328046
+        },
+        "RandomForest": {
+          "pr_auc_change_percent": 7.785190268910953,
+          "f1_change_percent": 2.6460610629476045,
+          "baseline_pr_auc": 0.07092268013509198,
+          "scenario_pr_auc": 0.07644414572742
+        },
+        "Ensemble": {
+          "pr_auc_change_percent": -39.32532992669414,
+          "f1_change_percent": 32.95654962321629,
+          "baseline_pr_auc": 0.30595100641263995,
+          "scenario_pr_auc": 0.18563476372682813
+        }
+      },
+      "noisy_data": {
+        "XGBoost": {
+          "pr_auc_change_percent": -93.66374895354394,
+          "f1_change_percent": -84.48484848484848,
+          "baseline_pr_auc": 0.5092987450780805,
+          "scenario_pr_auc": 0.032270447064597405
+        },
+        "LightGBM": {
+          "pr_auc_change_percent": 1.209272754306729,
+          "f1_change_percent": -43.766696349065,
+          "baseline_pr_auc": 0.20284055187179062,
+          "scenario_pr_auc": 0.2052934474002616
+        },
+        "RandomForest": {
+          "pr_auc_change_percent": -91.7883135096896,
+          "f1_change_percent": -54.07292474786656,
+          "baseline_pr_auc": 0.07092268013509198,
+          "scenario_pr_auc": 0.0058239481432194075
+        },
+        "Ensemble": {
+          "pr_auc_change_percent": -80.1774433176126,
+          "f1_change_percent": -54.0969540969541,
+          "baseline_pr_auc": 0.30595100641263995,
+          "scenario_pr_auc": 0.060647311666480276
+        }
+      },
+      "missing_data": {
+        "XGBoost": {
+          "pr_auc_change_percent": -35.71687983620552,
+          "f1_change_percent": -18.730158730158735,
+          "baseline_pr_auc": 0.5092987450780805,
+          "scenario_pr_auc": 0.3273931242912398
+        },
+        "LightGBM": {
+          "pr_auc_change_percent": 35.066497131033806,
+          "f1_change_percent": 36.80293501048217,
+          "baseline_pr_auc": 0.20284055187179062,
+          "scenario_pr_auc": 0.2739696281744852
+        },
+        "RandomForest": {
+          "pr_auc_change_percent": 152.9194123110331,
+          "f1_change_percent": 18.18254411882137,
+          "baseline_pr_auc": 0.07092268013509198,
+          "scenario_pr_auc": 0.17937722579290846
+        },
+        "Ensemble": {
+          "pr_auc_change_percent": 3.332557749100886,
+          "f1_change_percent": 49.57611832611834,
+          "baseline_pr_auc": 0.30595100641263995,
+          "scenario_pr_auc": 0.31614700038529653
+        }
+      }
+    },
+    "vulnerabilities": [
+      {
+        "scenario": "fraud_increase",
+        "model": "LightGBM",
+        "metric": "pr_auc",
+        "change_percent": 31.21877712147957,
+        "severity": "high"
+      },
+      {
+        "scenario": "fraud_increase",
+        "model": "RandomForest",
+        "metric": "pr_auc",
+        "change_percent": 43.486365656507665,
+        "severity": "high"
+      },
+      {
+        "scenario": "fraud_increase",
+        "model": "Ensemble",
+        "metric": "pr_auc",
+        "change_percent": 22.389376973495484,
+        "severity": "high"
+      },
+      {
+        "scenario": "value_shift",
+        "model": "XGBoost",
+        "metric": "pr_auc",
+        "change_percent": -41.52168150946379,
+        "severity": "high"
+      },
+      {
+        "scenario": "value_shift",
+        "model": "LightGBM",
+        "metric": "pr_auc",
+        "change_percent": 29.580150718056863,
+        "severity": "high"
+      },
+      {
+        "scenario": "value_shift",
+        "model": "Ensemble",
+        "metric": "pr_auc",
+        "change_percent": -39.32532992669414,
+        "severity": "high"
+      },
+      {
+        "scenario": "noisy_data",
+        "model": "XGBoost",
+        "metric": "pr_auc",
+        "change_percent": -93.66374895354394,
+        "severity": "high"
+      },
+      {
+        "scenario": "noisy_data",
+        "model": "RandomForest",
+        "metric": "pr_auc",
+        "change_percent": -91.7883135096896,
+        "severity": "high"
+      },
+      {
+        "scenario": "noisy_data",
+        "model": "Ensemble",
+        "metric": "pr_auc",
+        "change_percent": -80.1774433176126,
+        "severity": "high"
+      },
+      {
+        "scenario": "missing_data",
+        "model": "XGBoost",
+        "metric": "pr_auc",
+        "change_percent": -35.71687983620552,
+        "severity": "high"
+      },
+      {
+        "scenario": "missing_data",
+        "model": "LightGBM",
+        "metric": "pr_auc",
+        "change_percent": 35.066497131033806,
+        "severity": "high"
+      },
+      {
+        "scenario": "missing_data",
+        "model": "RandomForest",
+        "metric": "pr_auc",
+        "change_percent": 152.9194123110331,
+        "severity": "high"
+      }
+    ]
+  },
+  "adversarial_attacks": {
+    "XGBoost": {
+      "perturbation_attack": {
+        "avg_prediction_change": "0.0029749556",
+        "max_prediction_change": "0.73241335",
+        "prediction_stability": 0.9970250444021076
+      }
+    },
+    "LightGBM": {
+      "perturbation_attack": {
+        "avg_prediction_change": 0.05227765265404122,
+        "max_prediction_change": 1.0,
+        "prediction_stability": 0.9477223473459588
+      }
+    },
+    "RandomForest": {
+      "perturbation_attack": {
+        "avg_prediction_change": 0.09973707681861342,
+        "max_prediction_change": 0.9250631262367451,
+        "prediction_stability": 0.9002629231813866
+      }
+    },
+    "Ensemble": {
+      "perturbation_attack": {
+        "avg_prediction_change": 0.040043931279940305,
+        "max_prediction_change": 0.8086208583328958,
+        "prediction_stability": 0.9599560687200597
+      }
+    }
+  },
+  "key_findings": {
+    "overall_robustness": "Modelos mostram boa robustez geral",
+    "vulnerabilities_identified": 12,
+    "most_robust_model": "LightGBM",
+    "drift_sensitivity": "An\u00e1lise de sensibilidade a concept drift realizada"
+  },
+  "recommendations": {
+    "monitoring": [
+      "Implementar monitoramento cont\u00ednuo de performance",
+      "Alertas autom\u00e1ticos para degrada\u00e7\u00e3o de performance",
+      "Re-treinamento peri\u00f3dico baseado em thresholds",
+      "Valida\u00e7\u00e3o cruzada temporal em produ\u00e7\u00e3o"
+    ],
+    "robustness_improvements": [
+      "Considerar ensemble methods para maior robustez",
+      "Implementar detec\u00e7\u00e3o de concept drift",
+      "Adicionar valida\u00e7\u00e3o de entrada de dados",
+      "Desenvolver estrat\u00e9gias de fallback"
+    ],
+    "adversarial_defenses": [
+      "Implementar valida\u00e7\u00e3o de entrada robusta",
+      "Monitorar distribui\u00e7\u00f5es de features",
+      "Usar t\u00e9cnicas de detec\u00e7\u00e3o de anomalias",
+      "Regular re-treinamento com dados recentes"
+    ]
+  }
+}

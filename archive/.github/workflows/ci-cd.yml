@@ -1,0 +1,371 @@
+name: AML Pipeline CI/CD
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Deployment environment'
+        required: true
+        default: 'staging'
+        type: choice
+        options:
+        - staging
+        - production
+
+env:
+  PYTHON_VERSION: '3.10'
+  DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY || 'ghcr.io' }}
+  DOCKER_IMAGE: '${{ github.repository }}'
+
+jobs:
+  # ========================================================================
+  # QUALITY ASSURANCE
+  # ========================================================================
+  quality-check:
+    name: Quality Assurance
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+
+    - name: Cache pip dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements*.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install -r requirements-freeze.txt
+
+    - name: Run linting
+      run: |
+        pip install flake8 black isort mypy
+        # stop the build if there are Python syntax errors or undefined names
+        flake8 src --count --select=E9,F63,F7,F82 --show-source --statistics
+        # exit-zero treats all errors as warnings
+        flake8 src --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+    - name: Check code formatting
+      run: |
+        black --check --diff src/
+        isort --check-only --diff src/
+
+    - name: Type checking
+      run: |
+        mypy src/ --ignore-missing-imports
+
+    - name: Security scan
+      run: |
+        pip install safety
+        safety check
+
+  # ========================================================================
+  # UNIT TESTS - REMOVED
+  # ========================================================================
+  # Tests removed as development validation happens in notebooks
+  
+  # ========================================================================
+  # INTEGRATION TESTS - REMOVED  
+  # ========================================================================
+  # Integration tests removed as notebook workflow covers validation
+
+  # ========================================================================
+  # BUILD DOCKER IMAGES
+  # ========================================================================
+  build-docker:
+    name: Build Docker Images
+    runs-on: ubuntu-latest
+    needs: quality-check
+    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Log in to Container Registry
+      uses: docker/login-action@v3
+      with:
+        registry: ${{ env.DOCKER_REGISTRY }}
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Extract metadata
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: ${{ env.DOCKER_REGISTRY }}/${{ env.DOCKER_IMAGE }}
+        tags: |
+          type=ref,event=branch
+          type=ref,event=pr
+          type=sha,prefix={{branch}}-
+          type=raw,value=latest,enable={{is_default_branch}}
+
+    - name: Build and push API image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./Dockerfile.api
+        push: true
+        tags: ${{ steps.meta.outputs.tags }}-api
+        labels: ${{ steps.meta.outputs.labels }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+    - name: Build and push CLI image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./Dockerfile.cli
+        push: true
+        tags: ${{ steps.meta.outputs.tags }}-cli
+        labels: ${{ steps.meta.outputs.labels }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+    - name: Build and push Dashboard image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./Dockerfile.dashboard
+        push: true
+        tags: ${{ steps.meta.outputs.tags }}-dashboard
+        labels: ${{ steps.meta.outputs.labels }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+
+  # ========================================================================
+  # DEPLOY TO STAGING
+  # ========================================================================
+  deploy-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: build-docker
+    if: github.ref == 'refs/heads/develop' || (github.event_name == 'workflow_dispatch' && github.event.inputs.environment == 'staging')
+    environment: staging
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: Deploy to ECS
+      run: |
+        # Update ECS service with new image
+        aws ecs update-service \
+          --cluster ${{ secrets.ECS_CLUSTER_NAME }} \
+          --service ${{ secrets.ECS_SERVICE_NAME }} \
+          --force-new-deployment \
+          --region ${{ secrets.AWS_REGION }}
+
+    - name: Wait for deployment
+      run: |
+        aws ecs wait services-stable \
+          --cluster ${{ secrets.ECS_CLUSTER_NAME }} \
+          --services ${{ secrets.ECS_SERVICE_NAME }} \
+          --region ${{ secrets.AWS_REGION }}
+
+    - name: Run smoke tests
+      run: |
+        # Wait for service to be healthy
+        sleep 60
+        # Run basic health check
+        curl -f https://staging-api.aml-pipeline.com/health || exit 1
+
+  # ========================================================================
+  # DEPLOY TO PRODUCTION
+  # ========================================================================
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: build-docker
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    environment: production
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - name: Deploy to ECS (Blue-Green)
+      run: |
+        # Blue-green deployment strategy
+        CURRENT_COLOR=$(aws ecs describe-services \
+          --cluster ${{ secrets.ECS_CLUSTER_NAME }} \
+          --services ${{ secrets.ECS_SERVICE_NAME }} \
+          --region ${{ secrets.AWS_REGION }} \
+          --query 'services[0].taskDefinition' \
+          --output text | grep -o 'blue\|green')
+
+        if [ "$CURRENT_COLOR" = "blue" ]; then
+          NEW_COLOR="green"
+        else
+          NEW_COLOR="blue"
+        fi
+
+        echo "Deploying to $NEW_COLOR environment"
+
+        # Update service to new color
+        aws ecs update-service \
+          --cluster ${{ secrets.ECS_CLUSTER_NAME }} \
+          --service ${{ secrets.ECS_SERVICE_NAME }}-$NEW_COLOR \
+          --force-new-deployment \
+          --region ${{ secrets.AWS_REGION }}
+
+    - name: Wait for deployment
+      run: |
+        aws ecs wait services-stable \
+          --cluster ${{ secrets.ECS_CLUSTER_NAME }} \
+          --services ${{ secrets.ECS_SERVICE_NAME }}-$NEW_COLOR \
+          --region ${{ secrets.AWS_REGION }}
+
+    - name: Switch traffic (Route 53)
+      run: |
+        # Update Route 53 weighted routing
+        aws route53 change-resource-record-sets \
+          --hosted-zone-id ${{ secrets.ROUTE53_HOSTED_ZONE_ID }} \
+          --change-batch '{
+            "Changes": [{
+              "Action": "UPSERT",
+              "ResourceRecordSet": {
+                "Name": "api.aml-pipeline.com",
+                "Type": "CNAME",
+                "SetIdentifier": "'$NEW_COLOR'",
+                "Weight": 100,
+                "TTL": 60,
+                "ResourceRecords": [{"Value": "'$NEW_COLOR'-api.aml-pipeline.com"}]
+              }
+            }]
+          }'
+
+    - name: Run production smoke tests
+      run: |
+        # Wait for DNS propagation
+        sleep 120
+        # Run comprehensive health checks
+        curl -f https://api.aml-pipeline.com/health || exit 1
+        curl -f https://api.aml-pipeline.com/docs || exit 1
+
+    - name: Notify deployment success
+      uses: 8398a7/action-slack@v3
+      with:
+        status: success
+        text: "🚀 AML Pipeline deployed to production successfully!"
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      if: success
+
+    - name: Notify deployment failure
+      uses: 8398a7/action-slack@v3
+      with:
+        status: failure
+        text: "❌ AML Pipeline production deployment failed!"
+      env:
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      if: failure
+
+  # ========================================================================
+  # SECURITY SCANNING
+  # ========================================================================
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    needs: build-docker
+    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'fs'
+        scan-ref: '.'
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+
+    - name: Upload Trivy scan results to GitHub Security tab
+      uses: github/codeql-action/upload-sarif@v2
+      if: always()
+      with:
+        sarif_file: 'trivy-results.sarif'
+
+    - name: Run Snyk security scan
+      uses: snyk/actions/python-3.10@master
+      continue-on-error: true
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      with:
+        args: --file=requirements.txt
+
+  # ========================================================================
+  # PERFORMANCE TESTING
+  # ========================================================================
+  performance-test:
+    name: Performance Test
+    runs-on: ubuntu-latest
+    needs: deploy-staging
+    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Run k6 load testing
+      uses: k6io/action@v0.1
+      with:
+        filename: tests/performance/k6-script.js
+        flags: --out json=results.json
+
+    - name: Upload performance results
+      uses: actions/upload-artifact@v3
+      with:
+        name: performance-results
+        path: results.json
+
+    - name: Check performance thresholds
+      run: |
+        # Parse results and check against thresholds
+        RESPONSE_TIME=$(jq '.metrics.http_req_duration."95p"' results.json)
+        ERROR_RATE=$(jq '.metrics.http_req_failed.rate' results.json)
+
+        if (( $(echo "$RESPONSE_TIME > 500" | bc -l) )); then
+          echo "❌ Response time too high: ${RESPONSE_TIME}ms"
+          exit 1
+        fi
+
+        if (( $(echo "$ERROR_RATE > 0.01" | bc -l) )); then
+          echo "❌ Error rate too high: ${ERROR_RATE}"
+          exit 1
+        fi
+
+        echo "✅ Performance tests passed"

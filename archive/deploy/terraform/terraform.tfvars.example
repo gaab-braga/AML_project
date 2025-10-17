@@ -1,0 +1,40 @@
+# AML Pipeline Terraform Variables Example
+# Copy this file to terraform.tfvars and update with your values
+
+# AWS Configuration
+aws_region  = "us-east-1"
+aws_profile = "default"
+environment = "staging"
+
+# VPC Configuration (optional - defaults provided)
+vpc_cidr = "10.0.0.0/16"
+private_subnets = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+public_subnets  = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
+
+# ECS Configuration
+task_cpu    = "1024"
+task_memory = "2048"
+container_image = "ghcr.io/your-org/aml-pipeline:latest-api"
+
+# Load Balancer Traffic Weights (for blue-green deployment)
+traffic_weights = {
+  blue  = 100
+  green = 0
+}
+
+# Route 53 (only needed for production)
+route53_zone_id = "Z1234567890ABC"
+
+# Monitoring
+log_retention_days = 30
+
+# Secrets (NEVER commit actual values - use environment variables or AWS Secrets Manager)
+database_url = ""
+api_key      = ""
+
+# Additional tags
+tags = {
+  Project     = "AML Pipeline"
+  Owner       = "Data Science Team"
+  CostCenter  = "DS-001"
+}

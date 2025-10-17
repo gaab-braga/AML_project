@@ -1,0 +1,61 @@
+{
+  "timestamp": "2025-10-16T12:10:05.503089",
+  "tabular_data": {
+    "samples": 5078336,
+    "features": 13,
+    "feature_names": [
+      "from_bank",
+      "to_bank",
+      "Amount Received",
+      "Receiving Currency",
+      "amount",
+      "Payment Currency",
+      "payment_format",
+      "hour",
+      "day_of_week",
+      "is_business_hours",
+      "is_weekend",
+      "source_degree",
+      "target_degree"
+    ],
+    "positive_cases": 5177,
+    "fraud_rate": 0.0010194284111961084,
+    "data_hash": "7ead277bb17dcc30cf34824217862ab4848460af172876127d55fa978f469c5d",
+    "target_hash": "56331c83cd818e999fc0bb385f14ecf4abde51b4e49bc02489255ac8413e7445"
+  },
+  "gnn_data": {
+    "transactions_available": true,
+    "accounts_available": true,
+    "patterns_available": true,
+    "transaction_samples": 5078345,
+    "transaction_columns": [
+      "EdgeID",
+      "from_id",
+      "to_id",
+      "Timestamp",
+      "Amount Sent",
+      "Sent Currency",
+      "Amount Received",
+      "Received Currency",
+      "Payment Format",
+      "Is Laundering"
+    ],
+    "has_target": true,
+    "positive_cases": 5177,
+    "fraud_rate": 0.0010194266045335635,
+    "accounts_samples": 518581,
+    "account_columns": [
+      "Bank Name",
+      "Bank ID",
+      "Account Number",
+      "Entity ID",
+      "Entity Name"
+    ],
+    "patterns_count": 370
+  },
+  "parity_check": {
+    "sample_count_match": false,
+    "positive_cases_match": true,
+    "target_available": true
+  }
+}

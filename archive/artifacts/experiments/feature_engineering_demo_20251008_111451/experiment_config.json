@@ -1,0 +1,148 @@
+{
+  "experiment_name": "feature_engineering_demo",
+  "experiment_type": "feature_engineering",
+  "description": "Demonstração do pipeline de feature engineering com experiment manager",
+  "data": {
+    "source": "HI-Small_Trans.csv",
+    "train_samples": 1000,
+    "features_count": 15,
+    "target_distribution": {
+      "0": 937,
+      "1": 63
+    }
+  },
+  "feature_engineering": {
+    "temporal_features": {
+      "rolling_window": 30,
+      "aggregation_functions": [
+        "sum",
+        "mean",
+        "std",
+        "min",
+        "max"
+      ],
+      "group_by": "Account"
+    },
+    "categorical_encoding": {
+      "method": "target_encoding",
+      "columns": [
+        "Dest Account",
+        "Payment Format",
+        "From Bank",
+        "Account",
+        "To Bank"
+      ],
+      "smoothing": 0.2
+    },
+    "outlier_detection": {
+      "method": "isolation_forest",
+      "contamination": 0.01
+    }
+  },
+  "feature_selection": {
+    "rfe": {
+      "n_features_to_select": 10,
+      "base_model": "LogisticRegression"
+    },
+    "feature_importance": {
+      "model": "RandomForestClassifier",
+      "n_estimators": 100
+    }
+  },
+  "artifacts": {
+    "target_encoders": [
+      "account_encoder",
+      "payment_encoder"
+    ],
+    "rfe_selected_features": [
+      "feature_0",
+      "feature_1",
+      "feature_2",
+      "feature_3",
+      "feature_4",
+      "feature_5",
+      "feature_6",
+      "feature_7",
+      "feature_8",
+      "feature_9"
+    ],
+    "feature_importance": [
+      {
+        "feature": "feature_4",
+        "importance": 0.9010384977340232
+      },
+      {
+        "feature": "feature_5",
+        "importance": 0.8770386290433045
+      },
+      {
+        "feature": "feature_1",
+        "importance": 0.7593235685784019
+      },
+      {
+        "feature": "feature_10",
+        "importance": 0.7299983109899704
+      },
+      {
+        "feature": "feature_13",
+        "importance": 0.6632806368578182
+      },
+      {
+        "feature": "feature_0",
+        "importance": 0.5745782465305711
+      },
+      {
+        "feature": "feature_3",
+        "importance": 0.4926642258305287
+      },
+      {
+        "feature": "feature_14",
+        "importance": 0.48208934452447993
+      },
+      {
+        "feature": "feature_8",
+        "importance": 0.4433200064790801
+      },
+      {
+        "feature": "feature_12",
+        "importance": 0.3466396943698862
+      },
+      {
+        "feature": "feature_7",
+        "importance": 0.3036984691289467
+      },
+      {
+        "feature": "feature_11",
+        "importance": 0.18451199559871156
+      },
+      {
+        "feature": "feature_9",
+        "importance": 0.17226481435578822
+      },
+      {
+        "feature": "feature_2",
+        "importance": 0.0895156997948855
+      },
+      {
+        "feature": "feature_6",
+        "importance": 0.04681395723422754
+      }
+    ]
+  },
+  "config": {
+    "random_state": 42,
+    "test_size": 0.2,
+    "cv_folds": 5
+  },
+  "metadata": {
+    "created_by": "feature_engineering_notebook_demo",
+    "notebook_version": "1.0",
+    "dependencies": [
+      "pandas",
+      "numpy",
+      "scikit-learn",
+      "category_encoders"
+    ],
+    "execution_date": "2025-10-08T11:14:51.519016"
+  }
+}

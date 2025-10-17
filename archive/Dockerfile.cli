@@ -1,0 +1,90 @@
+# ==============================================================================
+# Multi-stage Dockerfile para AML Pipeline CLI
+# ==============================================================================
+#
+# Build otimizado para CLI com imagem slim.
+# Autor: Time de Data Science
+# Data: Janeiro 2025
+#
+
+# ==============================================================================
+# Stage 1: Base com dependências do sistema
+# ==============================================================================
+FROM python:3.10-slim as base
+
+# Metadados
+LABEL maintainer="datascience@empresa.com"
+LABEL version="1.0.0"
+LABEL description="AML Pipeline CLI Tool"
+
+# Variáveis de ambiente
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1
+
+# Instalar dependências do sistema
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    gcc \
+    g++ \
+    libgomp1 \
+    && rm -rf /var/lib/apt/lists/*
+
+# ==============================================================================
+# Stage 2: Build - Instalar dependências Python
+# ==============================================================================
+FROM base as builder
+
+# Diretório de trabalho
+WORKDIR /app
+
+# Copiar requirements
+COPY requirements.txt ./
+
+# Instalar dependências Python
+RUN pip install --user --no-cache-dir -r requirements.txt
+
+# ==============================================================================
+# Stage 3: Production - Imagem final slim
+# ==============================================================================
+FROM python:3.10-slim as production
+
+# Variáveis de ambiente
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PATH=/root/.local/bin:$PATH \
+    AML_CONFIG_PATH=/app/config.yaml \
+    AML_MODEL_PATH=/app/artifacts/models/ \
+    AML_LOG_LEVEL=info
+
+# Instalar apenas runtime dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libgomp1 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Criar usuário não-root
+RUN useradd -m -u 1000 amluser && \
+    mkdir -p /app /app/src /app/artifacts /app/data /app/logs && \
+    chown -R amluser:amluser /app
+
+# Copiar dependências Python do builder
+COPY --from=builder --chown=amluser:amluser /root/.local /root/.local
+
+# Diretório de trabalho
+WORKDIR /app
+
+# Copiar código da aplicação
+COPY --chown=amluser:amluser src/ ./src/
+COPY --chown=amluser:amluser config.yaml ./
+COPY --chown=amluser:amluser aml-cli.py ./
+
+# Copiar artefatos e dados (se existirem)
+COPY --chown=amluser:amluser artifacts/ ./artifacts/
+COPY --chown=amluser:amluser data/ ./data/
+
+# Mudar para usuário não-root
+USER amluser
+
+# Comando de inicialização
+ENTRYPOINT ["python", "aml-cli.py"]

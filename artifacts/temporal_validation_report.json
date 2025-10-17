@@ -1,0 +1,121 @@
+{
+  "timestamp": "2025-10-16T12:12:45.077560",
+  "phase": "Fase 3: Valida\u00e7\u00e3o Cruzada Temporal e M\u00e9tricas",
+  "temporal_splits": [
+    {
+      "split_id": 1,
+      "train_samples": 846391,
+      "test_samples": 846389,
+      "train_fraud_rate": 0.0002481122790766915,
+      "test_fraud_rate": 0.0005127665884126566,
+      "train_period": {
+        "start": "2022-09-01T00:00:00",
+        "end": "2022-09-01T15:59:00"
+      },
+      "test_period": {
+        "start": "2022-09-01T15:59:00",
+        "end": "2022-09-02T18:14:00"
+      }
+    },
+    {
+      "split_id": 2,
+      "train_samples": 1692780,
+      "test_samples": 846389,
+      "train_fraud_rate": 0.00038043927740167064,
+      "test_fraud_rate": 0.001302001798227529,
+      "train_period": {
+        "start": "2022-09-01T00:00:00",
+        "end": "2022-09-02T18:14:00"
+      },
+      "test_period": {
+        "start": "2022-09-02T18:14:00",
+        "end": "2022-09-05T12:16:00"
+      }
+    },
+    {
+      "split_id": 3,
+      "train_samples": 2539169,
+      "test_samples": 846389,
+      "train_fraud_rate": 0.000687626542384536,
+      "test_fraud_rate": 0.0010432555243510963,
+      "train_period": {
+        "start": "2022-09-01T00:00:00",
+        "end": "2022-09-05T12:16:00"
+      },
+      "test_period": {
+        "start": "2022-09-05T12:16:00",
+        "end": "2022-09-07T06:15:00"
+      }
+    },
+    {
+      "split_id": 4,
+      "train_samples": 3385558,
+      "test_samples": 846389,
+      "train_fraud_rate": 0.0007765337353547037,
+      "test_fraud_rate": 0.001110600444949072,
+      "train_period": {
+        "start": "2022-09-01T00:00:00",
+        "end": "2022-09-07T06:15:00"
+      },
+      "test_period": {
+        "start": "2022-09-07T06:15:00",
+        "end": "2022-09-09T00:18:00"
+      }
+    },
+    {
+      "split_id": 5,
+      "train_samples": 4231947,
+      "test_samples": 846389,
+      "train_fraud_rate": 0.0008433470456978786,
+      "test_fraud_rate": 0.0018998356547639443,
+      "train_period": {
+        "start": "2022-09-01T00:00:00",
+        "end": "2022-09-09T00:18:00"
+      },
+      "test_period": {
+        "start": "2022-09-09T00:18:00",
+        "end": "2022-09-18T16:18:00"
+      }
+    }
+  ],
+  "model_comparison": {
+    "tabular_models": {
+      "XGBoost": []
+    },
+    "gnn_benchmark": [
+      {
+        "split_id": 5,
+        "metrics": {
+          "precision": 0.0012,
+          "recall": 0.0012,
+          "f1_score": 0.0012,
+          "pr_auc": 0.001,
+          "roc_auc": 0.5,
+          "avg_precision": 0.001
+        },
+        "test_samples": 5078336,
+        "fraud_cases": 5177,
+        "fraud_rate": 0.00102
+      }
+    ]
+  },
+  "key_findings": {
+    "temporal_consistency": "Splits temporais aplicados consistentemente",
+    "performance_gap": "Grande diferen\u00e7a entre modelos tabulares e GNN",
+    "gnn_underperformance": "GNN mostra sinais claros de underfitting"
+  },
+  "recommendations": {
+    "immediate": [
+      "Investigar por que GNN performa t\u00e3o mal",
+      "Verificar se dados est\u00e3o sendo processados corretamente para grafos",
+      "Comparar distribui\u00e7\u00f5es de features entre abordagens",
+      "Executar GNN com mais epochs e melhor tuning"
+    ],
+    "validation": [
+      "Aplicar mesma metodologia de avalia\u00e7\u00e3o para todos os modelos",
+      "Usar m\u00e9tricas consistentes (PR-AUC, F1, Precision@K)",
+      "Documentar todas as diferen\u00e7as metodol\u00f3gicas",
+      "Considerar benchmark mais apropriado se GNN n\u00e3o funcionar"
+    ]
+  }
+}

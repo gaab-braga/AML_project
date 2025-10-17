@@ -1,0 +1,27 @@
+audit:
+  enabled: true
+  log_actions: true
+  retention_days: 365
+authentication:
+  enabled: false
+  lockout_duration: 900
+  max_login_attempts: 3
+  method: database
+  session_timeout: 3600
+authorization:
+  permissions:
+    admin:
+    - read
+    - write
+    - delete
+    - admin
+    analyst:
+    - read
+    - write
+    viewer:
+    - read
+  roles:
+  - admin
+  - analyst
+  - viewer
+max_login_attempts: 15

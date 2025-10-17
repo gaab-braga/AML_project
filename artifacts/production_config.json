@@ -1,0 +1,57 @@
+{
+  "model_name": "xgboost",
+  "model_version": "1.0.0",
+  "training_date": "2025-10-16T11:54:05.828486",
+  "framework": "xgboost",
+  "calibration_method": "isotonic",
+  "hyperparameters": {
+    "n_estimators": 218,
+    "max_depth": 8,
+    "learning_rate": 0.1205712628744377,
+    "subsample": 0.8394633936788146,
+    "colsample_bytree": 0.6624074561769746,
+    "min_child_weight": 2,
+    "gamma": 0.2904180608409973,
+    "scale_pos_weight": 43.44263114297183
+  },
+  "performance_metrics": {
+    "roc_auc": 0.9975211685681399,
+    "pr_auc": 0.39789245320895505,
+    "precision_at_100": 0.94,
+    "precision_at_500": 0.814,
+    "recall_at_5pct_fpr": 1.0,
+    "brier_score": 0.0008832996016865725,
+    "ece": 0.00020901439628872963
+  },
+  "data_info": {
+    "n_samples": 5078336,
+    "n_features": 13,
+    "feature_names": [
+      "from_bank",
+      "to_bank",
+      "Amount Received",
+      "Receiving Currency",
+      "amount",
+      "Payment Currency",
+      "payment_format",
+      "hour",
+      "day_of_week",
+      "is_business_hours",
+      "is_weekend",
+      "source_degree",
+      "target_degree"
+    ],
+    "fraud_rate": 0.0010194284111961084
+  },
+  "thresholds": {
+    "recommended": 0.5,
+    "regulatory_options": [
+      0.1,
+      0.3,
+      0.5,
+      0.7,
+      0.9
+    ]
+  },
+  "data_hash": "7ead277bb17dcc30cf34824217862ab4848460af172876127d55fa978f469c5d"
+}
