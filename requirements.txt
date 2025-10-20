@@ -6,6 +6,7 @@
 # === CORE DATA SCIENCE ===
 numpy>=1.26.0,<2.0.0          # Performance numérica otimizada
 pandas>=2.1.0,<3.0.0          # DataFrame processing avançado
+polars>=0.20.0,<1.0.0         # High-performance DataFrame library
 scikit-learn>=1.4.0,<2.0.0    # Machine learning algorithms
 
 # === NUMERICAL COMPUTATION ===

@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 def create_temporal_features(df: pd.DataFrame, windows: List[int] = [7, 30]) -> pd.DataFrame:
     """
-    Create temporal aggregation features for each entity.
+    Create temporal aggregation features for each entity using pandas with memory-efficient approach.
 
     Args:
         df: Transaction DataFrame with 'source', 'timestamp', 'amount'
@@ -23,52 +23,73 @@ def create_temporal_features(df: pd.DataFrame, windows: List[int] = [7, 30]) -> 
     Returns:
         DataFrame with temporal features
     """
-    logger.info("Creating temporal features...")
+    logger.info("Creating temporal features with pandas...")
+    start_total = time.time()
+    print("[temporal] Starting temporal feature creation with pandas...")
 
+    # Work with a copy to avoid modifying original
     df_temp = df.copy()
-    df_temp['date'] = pd.to_datetime(df_temp['timestamp']).dt.date
 
-    # Group by source entity
-    grouped = df_temp.groupby('source')
+    # Ensure timestamp is datetime
+    df_temp['timestamp'] = pd.to_datetime(df_temp['timestamp'])
 
-    temporal_dfs = []
-    for source, group in grouped:
-        group = group.sort_values('date').copy()
+    # Create temporal features for each window
+    for window in windows:
+        start_win = time.time()
+        print(f"[temporal] Processing window={window} days...")
 
-        for window in windows:
-            # Rolling aggregations
-            group[f'source_amount_sum_{window}d'] = group['amount'].rolling(
-                window=window, min_periods=1
-            ).sum()
+        # Group by source and create rolling features
+        grouped = df_temp.groupby('source')
 
-            group[f'source_amount_mean_{window}d'] = group['amount'].rolling(
-                window=window, min_periods=1
-            ).mean()
+        # Initialize new columns
+        df_temp[f'source_amount_sum_{window}d'] = 0.0
+        df_temp[f'source_amount_mean_{window}d'] = 0.0
+        df_temp[f'source_amount_std_{window}d'] = 0.0
+        df_temp[f'source_transaction_count_{window}d'] = 0
 
-            group[f'source_amount_std_{window}d'] = group['amount'].rolling(
-                window=window, min_periods=1
-            ).std()
+        # Process each group
+        for name, group in grouped:
+            if len(group) > 0:
+                # Sort group by timestamp
+                group_sorted = group.sort_values('timestamp').copy()
 
-            group[f'source_transaction_count_{window}d'] = group['amount'].rolling(
-                window=window, min_periods=1
-            ).count()
+                # Create rolling window aggregations
+                rolling = group_sorted.set_index('timestamp')['amount'].rolling(
+                    window=f'{window}D',
+                    min_periods=1
+                )
 
-        temporal_dfs.append(group)
+                # Calculate aggregations
+                sum_vals = rolling.sum()
+                mean_vals = rolling.mean()
+                std_vals = rolling.std()
+                count_vals = rolling.count()
 
-    result = pd.concat(temporal_dfs, ignore_index=True)
+                # Update the main dataframe using loc with the original indices
+                df_temp.loc[group_sorted.index, f'source_amount_sum_{window}d'] = sum_vals.values
+                df_temp.loc[group_sorted.index, f'source_amount_mean_{window}d'] = mean_vals.values
+                df_temp.loc[group_sorted.index, f'source_amount_std_{window}d'] = std_vals.values
+                df_temp.loc[group_sorted.index, f'source_transaction_count_{window}d'] = count_vals.values
 
-    # Fill NaN values
-    result = result.fillna(0)
+        elapsed_win = time.time() - start_win
+        print(f"[temporal] Finished window={window}d in {elapsed_win:.2f}s")
+
+    # Fill NaN values with 0
+    temporal_cols = [col for col in df_temp.columns if any(s in col for s in ['source_amount_', 'source_transaction_count_'])]
+    df_temp[temporal_cols] = df_temp[temporal_cols].fillna(0)
 
     # Add time-based features
-    result['hour'] = pd.to_datetime(result['timestamp']).dt.hour
-    result['day_of_week'] = pd.to_datetime(result['timestamp']).dt.dayofweek
-    result['is_business_hours'] = result['hour'].between(9, 17).astype(int)
-    result['is_weekend'] = result['day_of_week'].isin([5, 6]).astype(int)
+    df_temp['hour'] = df_temp['timestamp'].dt.hour
+    df_temp['day_of_week'] = df_temp['timestamp'].dt.weekday  # 0=Monday, 6=Sunday
+    df_temp['is_business_hours'] = df_temp['timestamp'].dt.hour.between(9, 17).astype(int)
+    df_temp['is_weekend'] = df_temp['timestamp'].dt.weekday.isin([5, 6]).astype(int)  # 5=Saturday, 6=Sunday
 
-    logger.info(f"Created {len([col for col in result.columns if 'temporal' in col.lower() or 'd' in col.lower()])} temporal features")
+    total_elapsed = time.time() - start_total
+    all_temporal_cols = temporal_cols + ['hour', 'day_of_week', 'is_business_hours', 'is_weekend']
+    logger.info(f"Created {len(all_temporal_cols)} temporal features using pandas")
+    print(f"[temporal] Done. Total time: {total_elapsed:.2f}s")
 
-    return result
+    return df_temp
 
 def create_network_features(df: pd.DataFrame) -> pd.DataFrame:
     """
@@ -563,49 +584,121 @@ def parse_laundering_patterns(file_path: str) -> List[Dict]:
 # Implementações locais temporárias (devido a problema sklearn/numpy)
 
 def load_raw_transactions(data_path='../data'):
-    """Carrega dados transacionais brutos."""
+    """Carrega dados transacionais brutos.
+    
+    Args:
+        data_path: Caminho para arquivo CSV ou diretório contendo arquivos CSV
+    """
     import os
     from pathlib import Path
 
-    data_dir = Path(data_path)
+    print(f" Tentando carregar de: {data_path}")
+    data_path_obj = Path(data_path).resolve()  # Resolver caminho absoluto
+    print(f" Caminho resolvido: {data_path_obj}")
+    print(f" É arquivo? {data_path_obj.is_file()}")
+    print(f" Existe? {data_path_obj.exists()}")
 
-    # Procurar especificamente pelo arquivo de transações
-    trans_file = data_dir / 'HI-Small_Trans.csv'
-    if trans_file.exists():
-        df = pd.read_csv(trans_file)
-        print(f" Carregado: {trans_file.name}")
-
-        # Mapear colunas para o formato esperado
-        column_mapping = {
-            'Timestamp': 'timestamp',
-            'From Bank': 'from_bank',
-            'Account': 'source',  # primeira ocorrência
-            'To Bank': 'to_bank',
-            'Account.1': 'target',  # segunda ocorrência
-            'Amount Paid': 'amount',
-            'Payment Format': 'payment_format',
-            'Is Laundering': 'is_fraud'
-        }
-
-        df = df.rename(columns=column_mapping)
-
-        # Converter timestamp
-        df['timestamp'] = pd.to_datetime(df['timestamp'])
-
-        # Converter is_fraud para int
-        df['is_fraud'] = df['is_fraud'].astype(int)
-
-        print(f" Colunas mapeadas: {list(df.columns)}")
+    # Se data_path for um arquivo específico, carregue diretamente
+    if data_path_obj.is_file() and data_path_obj.suffix.lower() == '.csv':
+        print(f" Carregado arquivo específico: {data_path_obj.name}")
+        df = pd.read_csv(data_path_obj)
+        
+        # Verificar se é arquivo processado específico
+        if data_path_obj.name == 'transactions_enriched_final.csv':
+            print(f" Aplicando mapeamento para arquivo processado: {data_path_obj.name}")
+            print(f" Colunas antes do mapeamento: {list(df.columns)[:5]}...")
+            
+            # Mapear colunas para o formato padrão
+            column_mapping = {
+                'Timestamp': 'timestamp',
+                'From Account': 'source',
+                'To Account': 'target',
+                'Amount Paid': 'amount',
+                'is_fraud': 'is_fraud'
+            }
+            df = df.rename(columns=column_mapping)
+            
+            print(f" Colunas após mapeamento: {list(df.columns)[:5]}...")
+            
+            # Garantir tipos corretos
+            if 'timestamp' in df.columns:
+                df['timestamp'] = pd.to_datetime(df['timestamp'])
+            if 'is_fraud' in df.columns:
+                df['is_fraud'] = df['is_fraud'].astype(int)
+            if 'amount' in df.columns:
+                df['amount'] = pd.to_numeric(df['amount'], errors='coerce')
+            
+            print(f" Arquivo processado mapeado: {list(df.columns)[:5]}...")
+        
+        # Tentar mapear colunas se for arquivo bruto
+        elif 'Timestamp' in df.columns:
+            column_mapping = {
+                'Timestamp': 'timestamp',
+                'From Bank': 'from_bank',
+                'Account': 'source',  # primeira ocorrência
+                'To Bank': 'to_bank',
+                'Account.1': 'target',  # segunda ocorrência
+                'Amount Paid': 'amount',
+                'Payment Format': 'payment_format',
+                'Is Laundering': 'is_fraud'
+            }
+            df = df.rename(columns=column_mapping)
+            df['timestamp'] = pd.to_datetime(df['timestamp'])
+            df['is_fraud'] = df['is_fraud'].astype(int)
+            print(f" Colunas mapeadas para formato padrão: {list(df.columns)}")
+        
         return df
 
-    # Fallback: procurar qualquer arquivo CSV
+    # Caso contrário, tratar como diretório
+    if not data_path_obj.is_dir():
+        raise FileNotFoundError(f"Caminho não encontrado ou não é arquivo/diretório válido: {data_path}")
+        
+    data_dir = data_path_obj
+    print(f" Procurando arquivos CSV em: {data_dir}")
+
+    # Listar todos os arquivos CSV disponíveis
     csv_files = list(data_dir.glob('*.csv'))
-    if csv_files:
-        df = pd.read_csv(csv_files[0])
-        print(f" Carregado (fallback): {csv_files[0].name}")
+    if not csv_files:
+        raise FileNotFoundError(f"Nenhum arquivo CSV encontrado em {data_path}")
+    
+    print(f" Arquivos CSV encontrados: {[f.name for f in csv_files]}")
+    
+    # Verificar se estamos no diretório processed e forçar carregamento do arquivo final
+    processed_file = data_dir / 'transactions_enriched_final.csv'
+    if processed_file.exists():
+        print(f"  Carregando arquivo processado específico: transactions_enriched_final.csv")
+        df = pd.read_csv(processed_file)
+        
+        print(f"  Aplicando mapeamento para transactions_enriched_final.csv")
+        print(f"  Colunas antes do mapeamento: {list(df.columns)[:5]}...")
+        
+        # Mapear colunas para o formato padrão
+        column_mapping = {
+            'From Account': 'source',
+            'To Account': 'target',
+            'Amount Paid': 'amount',
+            'timestamp': 'timestamp',
+            'is_fraud': 'is_fraud'
+        }
+        df = df.rename(columns=column_mapping)
+        
+        print(f"  Colunas após mapeamento: {list(df.columns)[:5]}...")
+        
+        # Garantir tipos corretos
+        if 'timestamp' in df.columns:
+            df['timestamp'] = pd.to_datetime(df['timestamp'])
+        if 'is_fraud' in df.columns:
+            df['is_fraud'] = df['is_fraud'].astype(int)
+        if 'amount' in df.columns:
+            df['amount'] = pd.to_numeric(df['amount'], errors='coerce')
+        
+        print(f"  Arquivo processado mapeado: {list(df.columns)[:5]}...")
         return df
-
-    raise FileNotFoundError(f"Nenhum arquivo CSV encontrado em {data_path}")
+    
+    # Fallback: carregar primeiro arquivo CSV encontrado
+    df = pd.read_csv(csv_files[0])
+    print(f" Carregado (fallback): {csv_files[0].name}")
+    return df
 
 def validate_data_compliance(df):
     """Validação básica de compliance."""
@@ -627,7 +720,7 @@ def validate_data_compliance(df):
 
 def clean_transactions(df):
     """Limpeza básica de transações."""
-    print("🧹 Aplicando limpeza de dados...")
+    print(" Aplicando limpeza de dados...")
 
     # Remover duplicatas
     initial_len = len(df)

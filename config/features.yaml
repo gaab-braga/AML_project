@@ -1,0 +1,67 @@
+# AML Feature Engineering Configuration
+# This file contains all parameters for the feature engineering pipeline
+
+# Data paths
+data:
+  raw_path: "../data/raw"
+  processed_path: "../data/processed"
+  artifacts_path: "../artifacts"
+
+# Feature engineering parameters
+features:
+  target_col: "is_fraud"
+
+  # Temporal features
+  temporal:
+    enabled: false  # Based on IV analysis, temporal features were excluded
+    windows: [7, 30]
+
+  # Network features
+  network:
+    enabled: false  # Based on IV analysis, network features were excluded
+    metrics: ["degree", "in_degree", "out_degree", "degree_centrality"]
+
+  # Categorical encoding
+  categorical:
+    enabled: true
+    columns: []  # Auto-detect categorical columns
+
+  # Pattern features
+  patterns:
+    enabled: true
+
+  # Feature selection
+  selection:
+    enabled: true
+    min_iv: 0.02
+    exclude_suspect: true
+
+# Pipeline configuration
+pipeline:
+  steps:
+    - name: "data_cleaning"
+      enabled: true
+    - name: "categorical_encoding"
+      enabled: true
+    - name: "temporal_features"
+      enabled: false
+    - name: "network_features"
+      enabled: false
+    - name: "pattern_features"
+      enabled: true
+    - name: "feature_selection"
+      enabled: true
+    - name: "scaler"
+      enabled: false
+
+# Model training parameters (for reference)
+training:
+  test_size: 0.2
+  random_state: 42
+  cv_folds: 5
+
+# Output files
+output:
+  pipeline_file: "aml_feature_pipeline.pkl"
+  features_file: "features_with_patterns.pkl"
+  iv_analysis_file: "network_features_iv_analysis.csv"
