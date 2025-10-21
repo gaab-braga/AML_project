@@ -1,0 +1,842 @@
+{
+  "model_importance": [
+    {
+      "feature": "feature_35",
+      "model_importance": 0.04341270973253052
+    },
+    {
+      "feature": "feature_38",
+      "model_importance": 0.043307914075009765
+    },
+    {
+      "feature": "feature_37",
+      "model_importance": 0.03381268375260586
+    },
+    {
+      "feature": "feature_18",
+      "model_importance": 0.03236257040295944
+    },
+    {
+      "feature": "feature_14",
+      "model_importance": 0.031861261893517526
+    },
+    {
+      "feature": "feature_48",
+      "model_importance": 0.030651882458735447
+    },
+    {
+      "feature": "feature_36",
+      "model_importance": 0.02989703412544491
+    },
+    {
+      "feature": "feature_43",
+      "model_importance": 0.0294328319317227
+    },
+    {
+      "feature": "feature_21",
+      "model_importance": 0.026836849079149818
+    },
+    {
+      "feature": "feature_20",
+      "model_importance": 0.026715275332116914
+    },
+    {
+      "feature": "feature_11",
+      "model_importance": 0.02653173804106347
+    },
+    {
+      "feature": "feature_12",
+      "model_importance": 0.02652597999149726
+    },
+    {
+      "feature": "feature_46",
+      "model_importance": 0.026247909167889997
+    },
+    {
+      "feature": "feature_47",
+      "model_importance": 0.026230423327552006
+    },
+    {
+      "feature": "feature_9",
+      "model_importance": 0.025769282980855932
+    },
+    {
+      "feature": "feature_13",
+      "model_importance": 0.025436822713641453
+    },
+    {
+      "feature": "feature_5",
+      "model_importance": 0.024845490095326266
+    },
+    {
+      "feature": "feature_50",
+      "model_importance": 0.024616486018333286
+    },
+    {
+      "feature": "feature_10",
+      "model_importance": 0.024236389651766263
+    },
+    {
+      "feature": "feature_49",
+      "model_importance": 0.023167223185642082
+    },
+    {
+      "feature": "feature_41",
+      "model_importance": 0.02277612108626868
+    },
+    {
+      "feature": "feature_1",
+      "model_importance": 0.022701710121921757
+    },
+    {
+      "feature": "feature_8",
+      "model_importance": 0.022329627657912486
+    },
+    {
+      "feature": "feature_19",
+      "model_importance": 0.022137683692068814
+    },
+    {
+      "feature": "feature_32",
+      "model_importance": 0.022058289248610374
+    },
+    {
+      "feature": "feature_28",
+      "model_importance": 0.02043861773561494
+    },
+    {
+      "feature": "feature_27",
+      "model_importance": 0.018874029896849116
+    },
+    {
+      "feature": "feature_26",
+      "model_importance": 0.018011798369397612
+    },
+    {
+      "feature": "feature_24",
+      "model_importance": 0.01791571025543301
+    },
+    {
+      "feature": "feature_22",
+      "model_importance": 0.017788155892609247
+    },
+    {
+      "feature": "feature_4",
+      "model_importance": 0.01747246430094324
+    },
+    {
+      "feature": "feature_33",
+      "model_importance": 0.01670195308838025
+    },
+    {
+      "feature": "feature_0",
+      "model_importance": 0.01659450608898504
+    },
+    {
+      "feature": "feature_17",
+      "model_importance": 0.016570028863944368
+    },
+    {
+      "feature": "feature_30",
+      "model_importance": 0.016124317679594068
+    },
+    {
+      "feature": "feature_29",
+      "model_importance": 0.01587531198025474
+    },
+    {
+      "feature": "feature_23",
+      "model_importance": 0.014821917310455323
+    },
+    {
+      "feature": "feature_34",
+      "model_importance": 0.014393700192841254
+    },
+    {
+      "feature": "feature_25",
+      "model_importance": 0.01209583538844928
+    },
+    {
+      "feature": "feature_39",
+      "model_importance": 0.011375415902683726
+    },
+    {
+      "feature": "feature_3",
+      "model_importance": 0.011148893866196169
+    },
+    {
+      "feature": "feature_7",
+      "model_importance": 0.010018333754665725
+    },
+    {
+      "feature": "feature_2",
+      "model_importance": 0.009785654149845932
+    },
+    {
+      "feature": "feature_31",
+      "model_importance": 0.008747893667115089
+    },
+    {
+      "feature": "feature_6",
+      "model_importance": 0.008569017438367396
+    },
+    {
+      "feature": "feature_16",
+      "model_importance": 0.004554578311816607
+    },
+    {
+      "feature": "feature_45",
+      "model_importance": 0.004195744302907277
+    },
+    {
+      "feature": "feature_15",
+      "model_importance": 0.0038464768232657626
+    },
+    {
+      "feature": "feature_42",
+      "model_importance": 0.00017745497524176932
+    },
+    {
+      "feature": "feature_44",
+      "model_importance": 0.0
+    },
+    {
+      "feature": "feature_40",
+      "model_importance": 0.0
+    }
+  ],
+  "permutation_importance": [
+    {
+      "feature": "feature_19",
+      "perm_importance": 9.999999999998899e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_22",
+      "perm_importance": 7.333333333329566e-05,
+      "perm_std": 9.428090415830063e-06
+    },
+    {
+      "feature": "feature_18",
+      "perm_importance": 5.999999999994898e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_49",
+      "perm_importance": 5.999999999994898e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_20",
+      "perm_importance": 5.999999999994898e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_50",
+      "perm_importance": 4.666666666667633e-05,
+      "perm_std": 9.428090415777726e-06
+    },
+    {
+      "feature": "feature_17",
+      "perm_importance": 4.0000000000040004e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_35",
+      "perm_importance": 2.6666666666693335e-05,
+      "perm_std": 1.8856180831660125e-05
+    },
+    {
+      "feature": "feature_38",
+      "perm_importance": 2.6666666666693335e-05,
+      "perm_std": 9.428090415830063e-06
+    },
+    {
+      "feature": "feature_37",
+      "perm_importance": 2.6666666666693335e-05,
+      "perm_std": 1.8856180831660125e-05
+    },
+    {
+      "feature": "feature_47",
+      "perm_importance": 2.0000000000020002e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_46",
+      "perm_importance": 2.0000000000020002e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_5",
+      "perm_importance": 2.0000000000020002e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_11",
+      "perm_importance": 2.0000000000020002e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_13",
+      "perm_importance": 2.0000000000020002e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_12",
+      "perm_importance": 2.0000000000020002e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_43",
+      "perm_importance": 2.0000000000020002e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_28",
+      "perm_importance": 2.0000000000020002e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_1",
+      "perm_importance": 1.3333333333346667e-05,
+      "perm_std": 9.428090415830063e-06
+    },
+    {
+      "feature": "feature_4",
+      "perm_importance": 6.666666666673334e-06,
+      "perm_std": 9.428090415830063e-06
+    },
+    {
+      "feature": "feature_48",
+      "perm_importance": 6.666666666673334e-06,
+      "perm_std": 9.428090415830063e-06
+    },
+    {
+      "feature": "feature_21",
+      "perm_importance": 6.666666666673334e-06,
+      "perm_std": 9.428090415830063e-06
+    },
+    {
+      "feature": "feature_36",
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_41",
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_39",
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_40",
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_32",
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_42",
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_44",
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_45",
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_33",
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_0",
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_31",
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_14",
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_2",
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_3",
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_6",
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_7",
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_8",
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_9",
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_10",
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_15",
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_30",
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_16",
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_23",
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_24",
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_26",
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_27",
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_29",
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_25",
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_34",
+      "perm_importance": -6.666666666673334e-06,
+      "perm_std": 9.428090415830063e-06
+    }
+  ],
+  "combined_importance": [
+    {
+      "feature": "feature_19",
+      "model_importance": 0.022137683692068814,
+      "perm_importance": 9.999999999998899e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_22",
+      "model_importance": 0.017788155892609247,
+      "perm_importance": 7.333333333329566e-05,
+      "perm_std": 9.428090415830063e-06
+    },
+    {
+      "feature": "feature_18",
+      "model_importance": 0.03236257040295944,
+      "perm_importance": 5.999999999994898e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_49",
+      "model_importance": 0.023167223185642082,
+      "perm_importance": 5.999999999994898e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_20",
+      "model_importance": 0.026715275332116914,
+      "perm_importance": 5.999999999994898e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_50",
+      "model_importance": 0.024616486018333286,
+      "perm_importance": 4.666666666667633e-05,
+      "perm_std": 9.428090415777726e-06
+    },
+    {
+      "feature": "feature_17",
+      "model_importance": 0.016570028863944368,
+      "perm_importance": 4.0000000000040004e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_35",
+      "model_importance": 0.04341270973253052,
+      "perm_importance": 2.6666666666693335e-05,
+      "perm_std": 1.8856180831660125e-05
+    },
+    {
+      "feature": "feature_37",
+      "model_importance": 0.03381268375260586,
+      "perm_importance": 2.6666666666693335e-05,
+      "perm_std": 1.8856180831660125e-05
+    },
+    {
+      "feature": "feature_38",
+      "model_importance": 0.043307914075009765,
+      "perm_importance": 2.6666666666693335e-05,
+      "perm_std": 9.428090415830063e-06
+    },
+    {
+      "feature": "feature_47",
+      "model_importance": 0.026230423327552006,
+      "perm_importance": 2.0000000000020002e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_5",
+      "model_importance": 0.024845490095326266,
+      "perm_importance": 2.0000000000020002e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_13",
+      "model_importance": 0.025436822713641453,
+      "perm_importance": 2.0000000000020002e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_28",
+      "model_importance": 0.02043861773561494,
+      "perm_importance": 2.0000000000020002e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_12",
+      "model_importance": 0.02652597999149726,
+      "perm_importance": 2.0000000000020002e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_11",
+      "model_importance": 0.02653173804106347,
+      "perm_importance": 2.0000000000020002e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_46",
+      "model_importance": 0.026247909167889997,
+      "perm_importance": 2.0000000000020002e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_43",
+      "model_importance": 0.0294328319317227,
+      "perm_importance": 2.0000000000020002e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_1",
+      "model_importance": 0.022701710121921757,
+      "perm_importance": 1.3333333333346667e-05,
+      "perm_std": 9.428090415830063e-06
+    },
+    {
+      "feature": "feature_21",
+      "model_importance": 0.026836849079149818,
+      "perm_importance": 6.666666666673334e-06,
+      "perm_std": 9.428090415830063e-06
+    },
+    {
+      "feature": "feature_4",
+      "model_importance": 0.01747246430094324,
+      "perm_importance": 6.666666666673334e-06,
+      "perm_std": 9.428090415830063e-06
+    },
+    {
+      "feature": "feature_48",
+      "model_importance": 0.030651882458735447,
+      "perm_importance": 6.666666666673334e-06,
+      "perm_std": 9.428090415830063e-06
+    },
+    {
+      "feature": "feature_9",
+      "model_importance": 0.025769282980855932,
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_2",
+      "model_importance": 0.009785654149845932,
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_39",
+      "model_importance": 0.011375415902683726,
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_3",
+      "model_importance": 0.011148893866196169,
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_7",
+      "model_importance": 0.010018333754665725,
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_16",
+      "model_importance": 0.004554578311816607,
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_31",
+      "model_importance": 0.008747893667115089,
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_6",
+      "model_importance": 0.008569017438367396,
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_23",
+      "model_importance": 0.014821917310455323,
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_45",
+      "model_importance": 0.004195744302907277,
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_15",
+      "model_importance": 0.0038464768232657626,
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_42",
+      "model_importance": 0.00017745497524176932,
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_44",
+      "model_importance": 0.0,
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_25",
+      "model_importance": 0.01209583538844928,
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_0",
+      "model_importance": 0.01659450608898504,
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_29",
+      "model_importance": 0.01587531198025474,
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_30",
+      "model_importance": 0.016124317679594068,
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_14",
+      "model_importance": 0.031861261893517526,
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_33",
+      "model_importance": 0.01670195308838025,
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_24",
+      "model_importance": 0.01791571025543301,
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_26",
+      "model_importance": 0.018011798369397612,
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_27",
+      "model_importance": 0.018874029896849116,
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_36",
+      "model_importance": 0.02989703412544491,
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_32",
+      "model_importance": 0.022058289248610374,
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_8",
+      "model_importance": 0.022329627657912486,
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_41",
+      "model_importance": 0.02277612108626868,
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_10",
+      "model_importance": 0.024236389651766263,
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_40",
+      "model_importance": 0.0,
+      "perm_importance": 0.0,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_34",
+      "model_importance": 0.014393700192841254,
+      "perm_importance": -6.666666666673334e-06,
+      "perm_std": 9.428090415830063e-06
+    }
+  ],
+  "top_features": [
+    {
+      "feature": "feature_19",
+      "model_importance": 0.022137683692068814,
+      "perm_importance": 9.999999999998899e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_22",
+      "model_importance": 0.017788155892609247,
+      "perm_importance": 7.333333333329566e-05,
+      "perm_std": 9.428090415830063e-06
+    },
+    {
+      "feature": "feature_18",
+      "model_importance": 0.03236257040295944,
+      "perm_importance": 5.999999999994898e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_49",
+      "model_importance": 0.023167223185642082,
+      "perm_importance": 5.999999999994898e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_20",
+      "model_importance": 0.026715275332116914,
+      "perm_importance": 5.999999999994898e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_50",
+      "model_importance": 0.024616486018333286,
+      "perm_importance": 4.666666666667633e-05,
+      "perm_std": 9.428090415777726e-06
+    },
+    {
+      "feature": "feature_17",
+      "model_importance": 0.016570028863944368,
+      "perm_importance": 4.0000000000040004e-05,
+      "perm_std": 0.0
+    },
+    {
+      "feature": "feature_35",
+      "model_importance": 0.04341270973253052,
+      "perm_importance": 2.6666666666693335e-05,
+      "perm_std": 1.8856180831660125e-05
+    },
+    {
+      "feature": "feature_37",
+      "model_importance": 0.03381268375260586,
+      "perm_importance": 2.6666666666693335e-05,
+      "perm_std": 1.8856180831660125e-05
+    },
+    {
+      "feature": "feature_38",
+      "model_importance": 0.043307914075009765,
+      "perm_importance": 2.6666666666693335e-05,
+      "perm_std": 9.428090415830063e-06
+    }
+  ],
+  "sample_size": 50000,
+  "config": {
+    "sample_size": 50000,
+    "n_repeats": 3
+  },
+  "method": "model_importance_permutation",
+  "data_source": "test_set_holdout"
+}

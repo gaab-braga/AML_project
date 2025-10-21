@@ -1,0 +1,12 @@
+{
+  "f1_score": 0.0012,
+  "model_type": "Multi-GNN (GIN)",
+  "dataset": "HI-Small",
+  "comparison_f1": 0.2841880341880342,
+  "improvement_pct": 23582.336182336185,
+  "our_threshold": 0.23,
+  "our_model": "xgboost",
+  "evaluation_method": "holdout_test_set",
+  "our_roc_auc": 0.9555518323193086,
+  "our_pr_auc": 0.2187070592988425
+}

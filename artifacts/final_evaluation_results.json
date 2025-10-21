@@ -1,0 +1,29 @@
+{
+  "model_name": "xgboost",
+  "test_roc_auc": 0.9555518323193086,
+  "test_pr_auc": 0.2187070592988425,
+  "test_precision_100": 0.86,
+  "test_precision_500": 0.46,
+  "test_recall_at_5pct_fpr": 0.8006230529595015,
+  "test_size": 1015668,
+  "train_size": 4062668,
+  "split_method": "temporal_80_20",
+  "hyperparameters": {
+    "n_estimators": 200,
+    "max_depth": 10,
+    "learning_rate": 0.1205712628744377,
+    "subsample": 0.8394633936788146,
+    "colsample_bytree": 0.6624074561769746,
+    "min_child_weight": 2,
+    "gamma": 0.2904180608409973,
+    "reg_alpha": 0.8661761457749352,
+    "reg_lambda": 0.6011150117432088,
+    "random_state": 42,
+    "verbosity": 0,
+    "eval_metric": "auc",
+    "use_label_encoder": false
+  },
+  "calibrated_test_ece": 0.00013187245229642712,
+  "calibrated_test_brier": 0.0010905917524055078,
+  "calibration_method": "isotonic"
+}

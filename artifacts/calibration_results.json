@@ -1,0 +1,10 @@
+{
+  "ece_raw": 0.0011980652426397574,
+  "ece_calibrated": 0.0011980652426397574,
+  "brier_raw": 0.00040251335514763825,
+  "brier_calibrated": 0.00040251335514763825,
+  "precision_100": 0.0,
+  "recall_at_5pct_fpr": 0.0,
+  "best_model": "xgboost",
+  "calibration_method": "isotonic"
+}
