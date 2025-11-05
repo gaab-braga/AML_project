@@ -1,10 +1,90 @@
 {
-  "ece_raw": 0.0011980652426397574,
-  "ece_calibrated": 0.0011980652426397574,
-  "brier_raw": 0.00040251335514763825,
-  "brier_calibrated": 0.00040251335514763825,
-  "precision_100": 0.0,
-  "recall_at_5pct_fpr": 0.0,
-  "best_model": "xgboost",
-  "calibration_method": "isotonic"
+  "model_type": "XGBoost + Isotonic Calibration",
+  "performance": {
+    "roc_auc": 0.948458096920038,
+    "pr_auc": 0.3740739533331605,
+    "brier_score": 0.0012988104973144182,
+    "brier_score_uncalibrated": 0.0015326030628964845
+  },
+  "thresholds": {
+    "cost_optimal": 0.01756311745334797,
+    "f1_optimal": 0.17073170731707318
+  },
+  "precision_at_k": [
+    {
+      "K": 50,
+      "Precision@K": 0.98,
+      "Recall@K": 0.034075104311543813,
+      "Detected": 49,
+      "Total Frauds": 1438
+    },
+    {
+      "K": 100,
+      "Precision@K": 0.97,
+      "Recall@K": 0.0674547983310153,
+      "Detected": 97,
+      "Total Frauds": 1438
+    },
+    {
+      "K": 200,
+      "Precision@K": 0.95,
+      "Recall@K": 0.13212795549374132,
+      "Detected": 190,
+      "Total Frauds": 1438
+    },
+    {
+      "K": 500,
+      "Precision@K": 0.788,
+      "Recall@K": 0.27399165507649514,
+      "Detected": 394,
+      "Total Frauds": 1438
+    },
+    {
+      "K": 1000,
+      "Precision@K": 0.523,
+      "Recall@K": 0.36369958275382475,
+      "Detected": 523,
+      "Total Frauds": 1438
+    },
+    {
+      "K": 2000,
+      "Precision@K": 0.321,
+      "Recall@K": 0.44645340751043117,
+      "Detected": 642,
+      "Total Frauds": 1438
+    }
+  ],
+  "benchmark_comparison": [
+    {
+      "Model": "IBM Multi-GNN (Benchmark)",
+      "ROC-AUC": 0.9918,
+      "PR-AUC": 0.747,
+      "Brier Score": NaN,
+      "Precision@100": 0.78
+    },
+    {
+      "Model": "XGBoost (Uncalibrated)",
+      "ROC-AUC": 0.9516676522746528,
+      "PR-AUC": 0.3890110836123591,
+      "Brier Score": 0.0015326030628964845,
+      "Precision@100": 0.98
+    },
+    {
+      "Model": "XGBoost + Calibration (Ours)",
+      "ROC-AUC": 0.948458096920038,
+      "PR-AUC": 0.3740739533331605,
+      "Brier Score": 0.0012988104973144182,
+      "Precision@100": 0.97
+    }
+  ],
+  "cost_model": {
+    "cost_per_false_positive": 50,
+    "cost_per_false_negative": 5000,
+    "minimum_total_cost": 3070700.0
+  },
+  "production_recommendation": {
+    "recommended_threshold": 0.01756311745334797,
+    "expected_precision_at_100": 0.97,
+    "calibration_required": true
+  }
 }
