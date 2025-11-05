@@ -1,0 +1,68 @@
+{
+  "winner": "XGBoost",
+  "all_models": [
+    {
+      "model": "Logistic Regression",
+      "roc_auc": 0.555204584695944,
+      "pr_auc": 0.002353801357925716,
+      "precision@100": NaN,
+      "recall@100": NaN,
+      "precision@500": NaN,
+      "recall@500": NaN,
+      "precision@1000": NaN,
+      "recall@1000": NaN,
+      "best_params": NaN
+    },
+    {
+      "model": "LightGBM",
+      "roc_auc": 0.9519067772200587,
+      "pr_auc": 0.2774787339155521,
+      "precision@100": 0.7,
+      "recall@100": 0.038953811908736785,
+      "precision@500": 0.694,
+      "recall@500": 0.1930996104618809,
+      "precision@1000": 0.496,
+      "recall@1000": 0.2760155815247635,
+      "best_params": {
+        "n_estimators": 998,
+        "learning_rate": 0.01122568248320785,
+        "num_leaves": 148,
+        "max_depth": 11,
+        "subsample": 0.6871253290644129,
+        "colsample_bytree": 0.6006494457750724,
+        "reg_alpha": 0.02050892237328263,
+        "reg_lambda": 0.001320576977092659,
+        "random_state": 42,
+        "objective": "binary",
+        "metric": "average_precision",
+        "verbosity": -1,
+        "scale_pos_weight": 1200.9727810650888
+      }
+    },
+    {
+      "model": "XGBoost",
+      "roc_auc": 0.9516676522746528,
+      "pr_auc": 0.3890110836123591,
+      "precision@100": 0.98,
+      "recall@100": 0.054535336672231496,
+      "precision@500": 0.848,
+      "recall@500": 0.23594880356149137,
+      "precision@1000": 0.598,
+      "recall@1000": 0.3327768503060657,
+      "best_params": {
+        "n_estimators": 572,
+        "learning_rate": 0.09990065662820571,
+        "max_depth": 11,
+        "subsample": 0.9160121439977356,
+        "colsample_bytree": 0.8245932866080867,
+        "reg_alpha": 3.7317230241757935,
+        "reg_lambda": 0.0020846436432543566,
+        "random_state": 42,
+        "objective": "binary:logistic",
+        "eval_metric": "aucpr",
+        "tree_method": "hist",
+        "scale_pos_weight": 1200.9727810650888
+      }
+    }
+  ]
+}

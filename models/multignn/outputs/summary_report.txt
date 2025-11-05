@@ -1,0 +1,22 @@
+================================================================================
+GNN NODE CLASSIFICATION - EXECUTIVE SUMMARY
+================================================================================
+
+ARCHITECTURE:
+  Model: IBM GINe
+  Task: Node Classification (Account-level fraud detection)
+  Parameters: 13,124
+
+KEY RESULTS:
+  PR-AUC: 0.7470
+  ROC-AUC: 0.9918
+  F1-Score: 0.7723
+  Best Epoch: 1
+  Training Time: 8.6 minutes
+
+DATASET:
+  Total nodes: 30,470
+  Total edges: 5,078,345
+  Fraud rate: 3.35%
+
+================================================================================

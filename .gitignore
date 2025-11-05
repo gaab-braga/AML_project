@@ -144,6 +144,11 @@ artifacts/*.pb
 artifacts/*.onnx
 artifacts/*.tflite
 
+# Dataset files
+data/raw/
+data/processed/
+
+
 # Cache directories
 .cache/
 __pycache__/
@@ -172,13 +177,28 @@ config/private_config.yaml
 *.bak
 *.backup
 
-# Removed files (to avoid re-adding)
-run_pipeline.py
-install_requirements.py
+# Archived/Legacy content (cleaned up project)
+_archives/
+*_legacy/
+temp_cells.txt
+fix_backticks.py
+cleanup*.bat
+cleanup*.py
+cleanup*.ps1
+run_test.sh
+
+# Legacy notebooks (moved to _archives)
+extensive-eda-and-modeling-xgb-hyperopt.ipynb
+reference_EDA.ipynb
+reference_MAP.ipynb
+
+# Documentation cleanup files
 CLEANUP_*.md
 REQUIREMENTS_*.md
 DEPENDENCIES.md
 LIMPEZA_*.md
+TRACKING_*.md
+TRACKING_*.txt
 
 # Conda environments
 envs/
@@ -204,6 +224,6 @@ secrets/
 *.pem
 config/api_keys.yaml
 
-# Markdown files (ignore all except README.md)
-*.md
-!README.md
+# Markdown files - Allow important documentation
+# Allow all .md files in project root and key directories
+# Only exclude specific cleanup/tracking documents (listed above)

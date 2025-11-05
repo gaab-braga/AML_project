@@ -1,0 +1,77 @@
+{
+  "comparison_results": {
+    "logistic": {
+      "pr_auc": 0.007302812045669575,
+      "roc_auc": 0.8391676540084055,
+      "precision@1000": 0.015,
+      "recall@1000": 0.02180232558139535,
+      "investigation_cost": 100000,
+      "prevented_loss": 750000,
+      "net_benefit": 650000,
+      "roi": 7.5
+    }
+  },
+  "final_results": {
+    "baseline_best": {
+      "pr_auc": 0.009051414215305918,
+      "roc_auc": 0.8414974935112777,
+      "precision@1000": 0.021,
+      "recall@1000": 0.016355140186915886,
+      "investigation_cost": 100000,
+      "prevented_loss": 1000000,
+      "net_benefit": 900000,
+      "roi": 10.0
+    },
+    "bagging": {
+      "pr_auc": 0.008627007955379405,
+      "roc_auc": 0.8401322211527458,
+      "precision@1000": 0.02,
+      "recall@1000": 0.01557632398753894,
+      "investigation_cost": 100000,
+      "prevented_loss": 1000000,
+      "net_benefit": 900000,
+      "roi": 10.0
+    },
+    "optimized": {
+      "pr_auc": 0.009133193266642463,
+      "roc_auc": 0.8379238569795242,
+      "precision@1000": 0.026,
+      "recall@1000": 0.020249221183800622,
+      "investigation_cost": 100000,
+      "prevented_loss": 1300000,
+      "net_benefit": 1200000,
+      "roi": 13.0
+    },
+    "calibrated": {
+      "pr_auc": 0.008230838389694154,
+      "roc_auc": 0.8364704754260205,
+      "precision@1000": 0.022,
+      "recall@1000": 0.017133956386292833,
+      "investigation_cost": 100000,
+      "prevented_loss": 1050000,
+      "net_benefit": 950000,
+      "roi": 10.5
+    }
+  },
+  "best_params": {
+    "C": 9.879756368319589,
+    "penalty": "l2"
+  },
+  "config": {
+    "data_dir": "..\\data\\processed",
+    "artifacts_dir": "..\\artifacts",
+    "features_file": "features_with_patterns.pkl",
+    "random_seed": 42,
+    "test_size": 0.2,
+    "val_size": 0.15,
+    "n_cv_folds": 5,
+    "optuna_trials": 50,
+    "early_stopping_patience": 200,
+    "n_bagging_models": 5,
+    "operational_k": 1000,
+    "investigation_cost_per_alert": 100,
+    "false_negative_cost": 50000,
+    "scale_pos_weight": 979.9418582190458
+  },
+  "timestamp": "2025-10-30T12:29:18.399506"
+}

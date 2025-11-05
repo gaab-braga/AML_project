@@ -13,7 +13,7 @@ from .data_io import load_raw_transactions, save_model
 from .preprocessing import clean_transactions, impute_and_encode
 from .features import aggregate_by_entity, compute_network_features
 from .modeling import build_pipeline, train_pipeline, load_model
-from .evaluation import compute_metrics, plot_roc_pr
+# from .evaluation import compute_metrics, plot_roc_pr  # Commented out to avoid conflict
 from .viz import plot_time_series, plot_network_subgraph
 
 # Make key classes available at package level
@@ -29,8 +29,8 @@ __all__ = [
     "build_pipeline",
     "train_pipeline",
     "load_model",
-    "compute_metrics",
-    "plot_roc_pr",
+    # "compute_metrics",  # Commented out to avoid conflict
+    # "plot_roc_pr",     # Commented out to avoid conflict
     "plot_time_series",
     "plot_network_subgraph"
 ]

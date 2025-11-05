@@ -1,0 +1,11 @@
+{
+  "original_size": 5078336,
+  "sampled_size": 1019808,
+  "reduction_ratio": 0.20081538519704092,
+  "original_fraud_rate": 0.0010194284111961084,
+  "sampled_fraud_rate": 0.0050764457623395775,
+  "temporal_correlation": NaN,
+  "original_amount_mean": 4509281.3592292005,
+  "sampled_amount_mean": 4465790.0729800435,
+  "timestamp": "2025-10-31T17:58:54.579241"
+}

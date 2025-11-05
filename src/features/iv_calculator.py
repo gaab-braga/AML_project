@@ -63,6 +63,7 @@ def calculate_iv(df: pd.DataFrame,
     >>> print(iv_results.head())
     """
     iv_list = []
+    skipped_reasons = {'high_cardinality': [], 'constant': [], 'errors': []}
 
     # Total events (1) and non-events (0)
     total_events = (df[target_col] == 1).sum()
@@ -83,12 +84,12 @@ def calculate_iv(df: pd.DataFrame,
 
             # Skip variables with too many unique values (potential leakage/IDs)
             if unique_values > max_unique_values:
-                print(f"Warning: Skipping {col} - too many unique values ({unique_values})")
+                skipped_reasons['high_cardinality'].append(col)
                 continue
 
             # Skip constant variables
             if unique_values <= 1:
-                print(f"Warning: Skipping {col} - constant variable")
+                skipped_reasons['constant'].append(col)
                 continue
 
             # Create bins if continuous numeric
@@ -140,8 +141,6 @@ def calculate_iv(df: pd.DataFrame,
 
             # Flag suspicious variables (potential leakage)
             is_suspect = (iv_capped == max_iv) or (unique_values > max_unique_values * 0.5)
-            if is_suspect:
-                print(f"Warning: {col} flagged as potentially suspicious (IV={iv_capped:.3f}, unique={unique_values})")
 
             iv_list.append({
                 'variable': col,
@@ -151,8 +150,17 @@ def calculate_iv(df: pd.DataFrame,
             })
 
         except Exception as e:
-            print(f"Error calculating IV for {col}: {e}")
+            skipped_reasons['errors'].append(col)
             continue
+
+    # Print a clean summary of skipped columns
+    for reason, cols in skipped_reasons.items():
+        if cols:
+            reason_text = reason.replace('_', ' ')
+            # Truncate list for cleaner output if it's too long
+            cols_to_show = cols[:3]
+            ellipsis = "..." if len(cols) > 3 else ""
+            print(f"Info: Skipped {len(cols)} {reason_text} columns (e.g., {cols_to_show}){ellipsis}")
 
     return pd.DataFrame(iv_list).sort_values(by='IV', ascending=False)
 

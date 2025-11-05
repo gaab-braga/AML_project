@@ -8,434 +8,42 @@ Functions:
 - plot_threshold_comparison_all_models_optimized: Detailed technical analysis
 - plot_executive_summary_aml: Executive dashboard for model selection
 - plot_feature_importance: Feature importance visualization
-- plot_shap_summary: SHAP explainability analysis
-- generate_executive_summary: Final model recommendation summary
+- create_figure_layout: Layout setup for EDA plots
+- plot_payment_format: Payment format distribution analysis
+- plot_date_fraud: Fraud rate by date analysis
+- plot_same_entity: Same entity transaction analysis
+- plot_same_bank: Same bank transaction analysis
+- plot_hour_patterns: Hourly patterns analysis
+- plot_target_distribution: Target variable distribution
+- print_statistical_analysis: Statistical analysis summary
 """
 
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
-import shap
-import hashlib
-import json
-import os
-from datetime import datetime
 
-# ========== PALETA DE CORES DARK MODE PROFISSIONAL ==========
-
-# Paleta AML Dark Mode - focada em compliance e profissionalismo
-AML_COLORS = {
-    'primary': '#00D4FF',      # Cyan brilhante para destaques
-    'secondary': '#FF6B6B',    # Coral para alertas/risco
-    'tertiary': '#4ECDC4',     # Teal para sucesso/compliance
-    'neutral': '#95A5A6',      # Cinza para elementos neutros
-    'background': '#1E1E1E',   # Fundo escuro
-    'surface': '#2D2D2D',      # Superfícies
-    'text_primary': '#FFFFFF', # Texto principal
-    'text_secondary': '#B0B0B0', # Texto secundário
-    'grid': '#404040',         # Linhas de grade
-    'warning': '#F39C12',      # Amarelo para avisos
-    'danger': '#E74C3C',       # Vermelho para erros
-    'success': '#27AE60',      # Verde para sucesso
-    'info': '#3498DB',         # Azul para informações
-    'purple': '#9B59B6',       # Roxo para destaques especiais
-    'orange': '#E67E22'        # Laranja para alertas moderados
-}
-
-# Paleta clara para melhor legibilidade
+# Paleta clara para melhor legibilidade (versão mais escura)
 AML_COLORS_LIGHT = {
-    'primary': '#1E88E5',      # Azul profissional
-    'secondary': '#D32F2F',    # Vermelho para alertas
-    'tertiary': '#2E7D32',     # Verde para sucesso
-    'neutral': '#757575',      # Cinza neutro
+    'primary': '#0D47A1',      # Azul escuro profissional
+    'secondary': '#B71C1C',    # Vermelho escuro para alertas
+    'tertiary': '#1B5E20',     # Verde escuro para sucesso
+    'neutral': '#424242',      # Cinza escuro neutro
     'background': '#FAFAFA',   # Fundo claro
     'surface': '#FFFFFF',      # Superfícies brancas
     'text_primary': '#212121', # Texto escuro
     'text_secondary': '#757575', # Texto secundário
-    'grid': '#E0E0E0',         # Linhas de grade suaves
-    'warning': '#F57C00',      # Laranja para avisos
+    'grid': '#BDBDBD',         # Linhas de grade mais escuras
+    'warning': '#E65100',      # Laranja escuro para avisos
     'danger': '#C62828',       # Vermelho escuro
     'success': '#2E7D32',      # Verde escuro
-    'info': '#1976D2',         # Azul escuro
-    'purple': '#7B1FA2',       # Roxo escuro
+    'info': '#1565C0',         # Azul escuro
+    'purple': '#6A1B9A',       # Roxo escuro
     'orange': '#E65100'        # Laranja escuro
 }
 
-# Configuração dark mode para matplotlib
-def set_dark_mode_style():
-    """Aplica estilo dark mode profissional para todas as visualizações AML."""
-    plt.style.use('dark_background')
-
-    # Configurações específicas para dark mode
-    plt.rcParams.update({
-        'figure.facecolor': AML_COLORS['background'],
-        'axes.facecolor': AML_COLORS['surface'],
-        'axes.edgecolor': AML_COLORS['grid'],
-        'axes.labelcolor': AML_COLORS['text_primary'],
-        'text.color': AML_COLORS['text_primary'],
-        'xtick.color': AML_COLORS['text_secondary'],
-        'ytick.color': AML_COLORS['text_secondary'],
-        'grid.color': AML_COLORS['grid'],
-        'grid.alpha': 0.3,
-        'legend.facecolor': AML_COLORS['surface'],
-        'legend.edgecolor': AML_COLORS['grid'],
-        'legend.labelcolor': AML_COLORS['text_primary'],
-        'font.size': 12,
-        'axes.titlesize': 14,
-        'axes.labelsize': 12,
-        'xtick.labelsize': 10,
-        'ytick.labelsize': 10,
-        'legend.fontsize': 10
-    })
-
-    return AML_COLORS
-
-# Configuração light mode para melhor legibilidade
-def set_light_mode_style():
-    """Aplica estilo light mode profissional para melhor legibilidade."""
-    plt.style.use('default')
-
-    # Configurações específicas para light mode
-    plt.rcParams.update({
-        'figure.facecolor': AML_COLORS_LIGHT['background'],
-        'axes.facecolor': AML_COLORS_LIGHT['surface'],
-        'axes.edgecolor': AML_COLORS_LIGHT['grid'],
-        'axes.labelcolor': AML_COLORS_LIGHT['text_primary'],
-        'text.color': AML_COLORS_LIGHT['text_primary'],
-        'xtick.color': AML_COLORS_LIGHT['text_secondary'],
-        'ytick.color': AML_COLORS_LIGHT['text_secondary'],
-        'grid.color': AML_COLORS_LIGHT['grid'],
-        'grid.alpha': 0.5,
-        'legend.facecolor': AML_COLORS_LIGHT['surface'],
-        'legend.edgecolor': AML_COLORS_LIGHT['grid'],
-        'legend.labelcolor': AML_COLORS_LIGHT['text_primary'],
-        'font.size': 12,
-        'axes.titlesize': 16,
-        'axes.labelsize': 14,
-        'xtick.labelsize': 12,
-        'ytick.labelsize': 12,
-        'legend.fontsize': 11,
-        'figure.dpi': 100
-    })
-
-    return AML_COLORS_LIGHT
-
-# Aplicar estilo light mode automaticamente para melhor legibilidade
-set_light_mode_style()
-
-def setup_plot_design():
-    """Configura e retorna a paleta de cores para os gráficos AML."""
-    return AML_COLORS_LIGHT
-
-# ========== UTILITÁRIOS PARA CACHE INTELIGENTE ==========
-
-def calculate_data_hash(X, y, sample_size=10000):
-    """
-    Calcula hash dos dados para detectar mudanças.
-
-    Args:
-        X: Features
-        y: Target
-        sample_size: Tamanho da amostra para hash (para performance)
-
-    Returns:
-        str: Hash MD5 dos dados
-    """
-    # Amostrar dados para performance
-    if len(X) > sample_size:
-        indices = np.random.RandomState(42).choice(len(X), size=sample_size, replace=False)
-        X_sample = X.iloc[indices] if hasattr(X, 'iloc') else X[indices]
-        y_sample = y.iloc[indices] if hasattr(y, 'iloc') else y[indices]
-    else:
-        X_sample, y_sample = X, y
-
-    # Combinar features e target
-    if hasattr(X_sample, 'values'):
-        data = np.concatenate([X_sample.values.flatten(), y_sample.values])
-    else:
-        data = np.concatenate([X_sample.flatten(), y_sample])
-
-    # Calcular hash
-    data_str = data.tobytes() if hasattr(data, 'tobytes') else str(data).encode()
-    return hashlib.md5(data_str).hexdigest()
-
-def check_data_compatibility(X_current, y_current, model_cache_path):
-    """
-    Verifica se os dados atuais são compatíveis com o modelo em cache.
-
-    Args:
-        X_current: Dados atuais de features
-        y_current: Dados atuais de target
-        model_cache_path: Caminho para o arquivo de cache do modelo
-
-    Returns:
-        dict: Status de compatibilidade com detalhes
-    """
-    if not os.path.exists(model_cache_path):
-        return {
-            'compatible': False,
-            'reason': 'cache_not_found',
-            'message': 'Arquivo de cache não encontrado'
-        }
-
-    try:
-        # Carregar metadata do cache
-        metadata_path = model_cache_path.replace('.pkl', '_metadata.json')
-        if not os.path.exists(metadata_path):
-            return {
-                'compatible': False,
-                'reason': 'metadata_missing',
-                'message': 'Metadata do cache não encontrado'
-            }
-
-        with open(metadata_path, 'r') as f:
-            metadata = json.load(f)
-
-        # Verificar hash dos dados
-        current_hash = calculate_data_hash(X_current, y_current)
-        cached_hash = metadata.get('data_hash')
-
-        if cached_hash != current_hash:
-            return {
-                'compatible': False,
-                'reason': 'data_changed',
-                'message': f'Dados mudaram (hash: {current_hash[:8]} vs {cached_hash[:8] if cached_hash else "None"})',
-                'current_hash': current_hash,
-                'cached_hash': cached_hash
-            }
-
-        # Verificar número de features
-        n_features_cached = metadata.get('n_features')
-        n_features_current = X_current.shape[1] if hasattr(X_current, 'shape') else len(X_current[0])
-
-        if n_features_cached != n_features_current:
-            return {
-                'compatible': False,
-                'reason': 'feature_mismatch',
-                'message': f'Número de features mudou: {n_features_current} vs {n_features_cached}',
-                'current_features': n_features_current,
-                'cached_features': n_features_cached
-            }
-
-        return {
-            'compatible': True,
-            'reason': 'ok',
-            'message': 'Dados compatíveis com cache'
-        }
-
-    except Exception as e:
-        return {
-            'compatible': False,
-            'reason': 'error',
-            'message': f'Erro ao verificar compatibilidade: {str(e)}'
-        }
-
-def update_cache_metadata(model_cache_path, X, y, additional_info=None):
-    """
-    Atualiza metadata do cache com informações dos dados atuais.
-
-    Args:
-        model_cache_path: Caminho para o arquivo de cache
-        X: Features atuais
-        y: Target atual
-        additional_info: Informações adicionais para armazenar
-    """
-    metadata_path = model_cache_path.replace('.pkl', '_metadata.json')
-
-    metadata = {
-        'data_hash': calculate_data_hash(X, y),
-        'n_samples': len(y),
-        'n_features': X.shape[1] if hasattr(X, 'shape') else len(X[0]),
-        'last_updated': datetime.now().isoformat(),
-        'cache_version': '2.0'
-    }
-
-    if additional_info:
-        metadata.update(additional_info)
-
-    with open(metadata_path, 'w') as f:
-        json.dump(metadata, f, indent=2)
-
-def smart_cache_loader(model_name, artifacts_dir, X_current, y_current, force_recalculate=False):
-    """
-    Carrega modelo do cache de forma inteligente, verificando compatibilidade.
-
-    Args:
-        model_name: Nome do modelo
-        artifacts_dir: Diretório de artefatos
-        X_current: Dados atuais de features
-        y_current: Dados atuais de target
-        force_recalculate: Forçar recálculo mesmo se compatível
-
-    Returns:
-        tuple: (modelo, evaluation_results, cache_status)
-    """
-    import os
-    import joblib
-
-    models_dir = os.path.join(artifacts_dir, 'trained_models')
-    model_path = os.path.join(models_dir, f'aml_model_{model_name}.pkl')
-    metadata_path = os.path.join(models_dir, f'aml_training_metadata_{model_name}.json')
-
-    # Verificar se cache existe
-    if not os.path.exists(model_path) or not os.path.exists(metadata_path):
-        return None, None, {
-            'status': 'cache_missing',
-            'message': 'Cache não encontrado - necessário treinar modelo'
-        }
-
-    # Verificar compatibilidade dos dados
-    compatibility = check_data_compatibility(X_current, y_current, model_path)
-
-    if not compatibility['compatible'] and not force_recalculate:
-        return None, None, {
-            'status': 'incompatible',
-            'message': compatibility['message'],
-            'reason': compatibility['reason']
-        }
-
-    try:
-        # Carregar modelo e metadata
-        model = joblib.load(model_path)
-
-        with open(metadata_path, 'r') as f:
-            metadata = json.load(f)
-
-        evaluation_results = metadata.get('evaluation_results', {})
-
-        # Se dados são compatíveis, retornar cache
-        if compatibility['compatible'] and not force_recalculate:
-            return model, evaluation_results, {
-                'status': 'loaded_from_cache',
-                'message': 'Modelo carregado do cache (dados compatíveis)',
-                'compatibility': compatibility
-            }
-
-        # Se force_recalculate ou dados incompatíveis, indicar necessidade de recálculo
-        return model, evaluation_results, {
-            'status': 'needs_recalculation',
-            'message': f'Cache encontrado mas {compatibility["reason"]} - recálculo necessário',
-            'compatibility': compatibility
-        }
-
-    except Exception as e:
-        return None, None, {
-            'status': 'error',
-            'message': f'Erro ao carregar cache: {str(e)}'
-        }
-
-def optimize_for_large_datasets(X, y, max_samples=50000, sample_fraction=None):
-    """
-    Otimiza dados para processamento em datasets grandes.
-
-    Args:
-        X: Features
-        y: Target
-        max_samples: Máximo número de amostras
-        sample_fraction: Fração para amostrar (se especificado, sobrescreve max_samples)
-
-    Returns:
-        tuple: (X_optimized, y_optimized, was_sampled)
-    """
-    n_samples = len(y)
-
-    if sample_fraction is not None:
-        sample_size = int(n_samples * sample_fraction)
-    else:
-        sample_size = min(n_samples, max_samples)
-
-    if sample_size < n_samples:
-        print(f"📊 Otimizando para dataset grande: {n_samples:,} → {sample_size:,} amostras")
-
-        # Amostragem estratificada para manter proporção de classes
-        from sklearn.model_selection import train_test_split
-
-        # Manter proporção de classes
-        X_sample, _, y_sample, _ = train_test_split(
-            X, y,
-            train_size=sample_size,
-            stratify=y,
-            random_state=42
-        )
-
-        return X_sample, y_sample, True
-
-    return X, y, False
-
-def robust_probability_recalculation(eval_results, X_data, y_true, model_name, max_retries=2):
-    """
-    Recalcula probabilidades de forma robusta com múltiplas estratégias de fallback.
-
-    Args:
-        eval_results: Resultados de avaliação do modelo
-        X_data: Dados de features atuais
-        y_true: Labels verdadeiros atuais
-        model_name: Nome do modelo
-        max_retries: Máximo de tentativas
-
-    Returns:
-        np.array: Probabilidades recalculadas ou None se falhou
-    """
-    if 'pipeline' not in eval_results:
-        print(f"❌ Pipeline não disponível para {model_name}")
-        return None
-
-    pipeline = eval_results['pipeline']
-
-    for attempt in range(max_retries + 1):
-        try:
-            if attempt == 0:
-                # Tentativa 1: Dados originais completos
-                print(f"🔄 Tentativa {attempt + 1}: Usando dados originais completos")
-                y_pred_proba = pipeline.predict_proba(X_data)[:, 1]
-
-            elif attempt == 1:
-                # Tentativa 2: Otimização para datasets grandes
-                print(f"🔄 Tentativa {attempt + 1}: Otimizando para dataset grande")
-                X_opt, y_opt, was_sampled = optimize_for_large_datasets(X_data, y_true, max_samples=50000)
-
-                if was_sampled:
-                    print(f"   Usando amostra de {len(X_opt):,} para recálculo")
-                    y_pred_proba = pipeline.predict_proba(X_opt)[:, 1]
-                else:
-                    # Mesmo que tentativa 1 se não foi amostrado
-                    continue
-
-            else:
-                # Tentativa 3: Cálculo aproximado baseado em threshold_analysis
-                print(f"🔄 Tentativa {attempt + 1}: Usando cálculo aproximado")
-                threshold_df = pd.DataFrame(eval_results['threshold_analysis'])
-
-                # Usar threshold ótimo para estimar probabilidades aproximadas
-                optimal_threshold = threshold_df.loc[threshold_df['f1'].idxmax(), 'threshold']
-
-                # Assumir distribuição normal em torno do threshold ótimo
-                n_samples = len(y_true)
-                np.random.seed(42)
-
-                # Gerar probabilidades sintéticas baseadas no threshold ótimo
-                # Isso é uma aproximação grosseira, mas melhor que falhar completamente
-                base_prob = optimal_threshold
-                noise = np.random.normal(0, 0.1, n_samples)
-                y_pred_proba = np.clip(base_prob + noise, 0, 1)
-
-                print(f"   ⚠️ Usando probabilidades aproximadas (método sintético)")
-
-            # Validar resultado
-            if len(y_pred_proba) == len(y_true) and np.all(np.isfinite(y_pred_proba)):
-                print(f"✅ Probabilidades recalculadas com sucesso: {len(y_pred_proba):,} amostras")
-                return y_pred_proba
-            else:
-                print(f"❌ Resultado inválido na tentativa {attempt + 1}")
-                continue
-
-        except Exception as e:
-            print(f"❌ Tentativa {attempt + 1} falhou: {str(e)[:100]}...")
-            continue
-
-    print(f"❌ Todas as tentativas de recálculo falharam para {model_name}")
-    return None
+# Aplicar estilo light mode automaticamente para melhor legibilidade (comentado para usar COLORS do notebook)
+# set_light_mode_style()
 
 def plot_threshold_comparison_all_models_optimized(eval_results_list, model_names, y_true, X_data=None, figsize=(22, 14), benchmark_metrics=None):
     """
@@ -502,19 +110,9 @@ def plot_threshold_comparison_all_models_optimized(eval_results_list, model_name
         if len(y_pred_proba) != len(y_true):
             print(f"⚠️ Inconsistência detectada para {model_name}: probabilidades ({len(y_pred_proba):,}) vs dados atuais ({len(y_true):,})")
 
-            # Tentar recálculo robusto com múltiplas estratégias
-            recalculated_proba = robust_probability_recalculation(
-                eval_results, X_data, y_true, model_name, max_retries=2
-            )
-
-            if recalculated_proba is not None:
-                # Atualizar probabilidades no dicionário original
-                eval_results['probabilities'] = recalculated_proba
-                y_pred_proba = recalculated_proba
-                print(f"✅ Probabilidades atualizadas automaticamente para {model_name}")
-            else:
-                print(f"⚠️ Usando probabilidades originais para {model_name} - resultados podem ser imprecisos")
-                print("   💡 Recomendação: Execute treinamento novamente para dados atualizados")        # 📊 CÁLCULO DE CUSTOS E MÉTRICAS COM FALLBACK ROBUSTO
+            # Recálculo não disponível (função removida)
+            print(f"❌ Recálculo automático não disponível para {model_name}")
+            print("   💡 Recomendação: Execute treinamento novamente para dados atualizados")        # 📊 CÁLCULO DE CUSTOS E MÉTRICAS COM FALLBACK ROBUSTO
         fp_cost = business_config['cost_benefit_ratio']['fp_cost']
         fn_cost = business_config['cost_benefit_ratio']['fn_cost']
 
@@ -1045,18 +643,9 @@ def plot_executive_summary_aml_new(eval_results_list, model_names, y_true, X_dat
         if len(y_pred_proba) != len(y_true):
             print(f"⚠️ Inconsistência detectada para {model_name}: probabilidades ({len(y_pred_proba):,}) vs dados atuais ({len(y_true):,})")
 
-            # Tentar recálculo automático se pipeline disponível
-            if 'pipeline' in eval_results and X_data is not None:
-                try:
-                    recalculated = robust_probability_recalculation(eval_results, X_data, y_true, model_name, max_retries=1)
-                    if recalculated is not None:
-                        eval_results['probabilities'] = recalculated
-                        y_pred_proba = recalculated
-                        print(f"✅ Probabilidades recalculadas automaticamente para {model_name}")
-                    else:
-                        raise Exception("Recálculo falhou")
-                except Exception as e:
-                    print(f"❌ Recálculo falhou: {str(e)[:50]}...")
+            # Recálculo não disponível (função removida)
+            print(f"❌ Recálculo automático não disponível para {model_name}")
+            print("   💡 Recomendação: Execute treinamento novamente para dados atualizados")
 
             # Usar dados de threshold_analysis como fallback inteligente
             if 'fraud_rate' in threshold_df.columns:
@@ -1391,21 +980,23 @@ def _calculate_approximate_costs(costs, fraud_rates, threshold_df, y_true, fp_co
             fraud_rate = threshold_df['precision'].mean() * (1 - threshold) * 0.1
             fraud_rates.append(max(fraud_rate, 0.001))  # Mínimo para evitar divisão por zero
 
-def create_figure_layout():
+def create_figure_layout(COLORS=None):
     """Cria a figura e layout base"""
-    COLORS = AML_COLORS_LIGHT  # Usar paleta light mode
-    fig, axes = plt.subplots(2, 3, figsize=(22, 14), facecolor='white')
+    if COLORS is None:
+        COLORS = AML_COLORS_LIGHT  # Fallback para light mode
+    
+    fig, axes = plt.subplots(2, 3, figsize=(22, 14), facecolor=COLORS.get('background', 'white'))
     fig.suptitle('🎯 Distribuições das Variáveis Mais Preditoras de Fraude\nAnálise Otimizada por Information Value',
-                 fontsize=18, fontweight='bold', color=COLORS['text_primary'], y=0.98)
+                 fontsize=18, fontweight='bold', color=COLORS.get('text_primary', '#212121'), y=0.98)
 
     # Adicionar subtítulo
     fig.text(0.5, 0.95, 'Comparação entre transações legítimas e fraudulentas | Priorização por poder preditivo',
-             ha='center', fontsize=12, style='italic', color='#666666')
+             ha='center', fontsize=12, style='italic', color=COLORS.get('text_secondary', '#757575'))
 
     # Estilo dos subplots
     for ax in axes.flat:
-        ax.set_facecolor('#FAFAFA')
-        ax.grid(True, alpha=0.3, linestyle='--', color='gray')
+        ax.set_facecolor(COLORS.get('background', '#FAFAFA'))
+        ax.grid(True, alpha=0.3, linestyle='--', color=COLORS.get('grid', 'gray'))
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
         ax.spines['left'].set_linewidth(0.5)

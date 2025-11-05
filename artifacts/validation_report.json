@@ -1,0 +1,34 @@
+{
+  "dataset_info": {
+    "total_accounts": 518581,
+    "total_patterns": 3949,
+    "total_transactions": 5078345,
+    "fraud_rate": 0.0,
+    "imbalance_ratio": 1.0,
+    "n_account_features": 0,
+    "n_pattern_features": 1
+  },
+  "feature_selection": {
+    "top_feature": null,
+    "top_feature_iv": 0.0,
+    "n_very_strong": 0,
+    "n_strong": 0,
+    "n_medium": 0
+  },
+  "artifacts_generated": [
+    "iv_analysis.png",
+    "feature_iv_analysis.csv",
+    "outlier_detection.png",
+    "outlier_analysis.csv",
+    "feature_distributions_by_class.png",
+    "temporal_fraud_patterns.png",
+    "temporal_patterns_summary.json",
+    "statistical_tests.png",
+    "statistical_tests.csv",
+    "correlation_matrix.png",
+    "pca_analysis.png",
+    "pca_summary.json",
+    "class_distribution.png",
+    "patterns_eda.png"
+  ]
+}
