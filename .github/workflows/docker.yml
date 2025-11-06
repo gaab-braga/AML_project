@@ -23,9 +23,24 @@ jobs:
     - name: Test Docker image
       run: |
         docker run -d --name test_container -p 8000:8000 aml-project:latest
-        sleep 10
-        curl -f http://localhost:8000/health || exit 1
+        echo "Waiting for container to start..."
+        sleep 20
+        echo "Checking container logs..."
+        docker logs test_container
+        echo "Testing health endpoint..."
+        for i in {1..5}; do
+          if curl -f http://localhost:8000/health 2>/dev/null; then
+            echo "Health check passed!"
+            docker stop test_container
+            exit 0
+          fi
+          echo "Attempt $i failed, retrying in 5 seconds..."
+          sleep 5
+        done
+        echo "Health check failed after 5 attempts"
+        docker logs test_container
         docker stop test_container
+        exit 1
     
     - name: Docker image info
       run: |

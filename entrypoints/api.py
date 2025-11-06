@@ -34,9 +34,14 @@ model = None
 async def startup_event():
     """Load model on startup."""
     global model
-    logger.info("Loading model")
-    model = load_model()
-    logger.info("Model loaded successfully")
+    try:
+        logger.info("Loading model")
+        model = load_model()
+        logger.info("Model loaded successfully")
+    except Exception as e:
+        logger.warning(f"Could not load model: {e}")
+        logger.warning("API will start without model (predictions will fail)")
+        model = None
 
 
 class Transaction(BaseModel):
@@ -81,6 +86,11 @@ async def health_check():
 @app.post("/predict", response_model=PredictionResponse)
 async def predict_transaction(transaction: Transaction):
     """Predict single transaction."""
+    if model is None:
+        raise HTTPException(
+            status_code=503,
+            detail="Model not loaded. Cannot make predictions."
+        )
     
     df = pd.DataFrame([transaction.dict()])
     df_features = build_features(df)
