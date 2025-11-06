@@ -46,6 +46,8 @@ streamlit>=1.29.0             # Web dashboard framework
 # === WEB API ===
 fastapi>=0.104.0              # High-performance API framework
 uvicorn[standard]>=0.24.0     # ASGI server
+pydantic>=2.5.0               # Data validation
+pydantic-settings>=2.1.0      # Settings management
 redis>=5.0.0                  # Redis client for caching
 prometheus-fastapi-instrumentator>=2.0.0  # Prometheus metrics
 
