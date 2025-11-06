@@ -1,52 +1,52 @@
-# 📚 Documentation
+#  Documentation
 
 Complete documentation for the AML Detection System.
 
-## 📖 Table of Contents
+##  Table of Contents
 
 ### For Everyone
 - **[Main README](../README.md)** - Start here! Project overview and quick start
 
-### 📘 Guides (Getting Started)
+###  Guides (Getting Started)
 - **[Quick Start](guides/QUICKSTART.md)** - Get running in 5 minutes
 - **[Deployment Guide](guides/DEPLOYMENT.md)** - Production deployment
 - **[Commands Cheat Sheet](guides/COMMANDS.md)** - Common commands reference
 
-### 🏗️ Implementation Details
+###  Implementation Details
 - **[Implementation Status](implementation/IMPLEMENTATION_STATUS.md)** - Complete status report (98% done)
 - **[Implementation Summary](implementation/IMPLEMENTATION_SUMMARY.md)** - Executive summary
 - **[Refactoring Roadmap](implementation/ROADMAP_REFACTORING.md)** - Detailed implementation plan
 
-### 💻 For Developers
+###  For Developers
 - **[Migration Guide](../notebooks/MIGRATION_GUIDE.md)** - Migrate from notebooks to code
 - **[Usage Examples](../notebooks/EXAMPLE_Refactored_Usage.md)** - Code examples
 - **[Test Documentation](../tests/README.md)** - Running tests
 - **[Contributing Guide](../CONTRIBUTING.md)** - How to contribute
 
-## 📊 Documentation by Role
+##  Documentation by Role
 
-### 👨‍💼 Project Manager / Stakeholder
+###  Project Manager / Stakeholder
 1. [Main README](../README.md) - 5 min
 2. [Implementation Summary](implementation/IMPLEMENTATION_SUMMARY.md) - 8 min
 3. [Implementation Status](implementation/IMPLEMENTATION_STATUS.md) - 10 min
 
-### 👨‍💻 Developer (New to Project)
+###  Developer (New to Project)
 1. [Quick Start](guides/QUICKSTART.md) - 5 min
 2. [Usage Examples](../notebooks/EXAMPLE_Refactored_Usage.md) - 8 min
 3. [Migration Guide](../notebooks/MIGRATION_GUIDE.md) - 10 min
 4. [Commands Cheat Sheet](guides/COMMANDS.md) - Reference
 
-### 🏗️ Architect / Tech Lead
+###  Architect / Tech Lead
 1. [Refactoring Roadmap](implementation/ROADMAP_REFACTORING.md) - 15 min
 2. [Implementation Status](implementation/IMPLEMENTATION_STATUS.md) - 10 min
 3. [Main README](../README.md) - 5 min
 
-### 🚀 DevOps / SRE
+###  DevOps / SRE
 1. [Deployment Guide](guides/DEPLOYMENT.md) - 12 min
 2. [Commands Cheat Sheet](guides/COMMANDS.md) - Reference
 3. [Main README](../README.md) - 5 min
 
-## 🔍 Quick Links
+##  Quick Links
 
 | Need | Document |
 |------|----------|
@@ -59,7 +59,7 @@ Complete documentation for the AML Detection System.
 | Contribute | [Contributing Guide](../CONTRIBUTING.md) |
 | Check status | [Implementation Status](implementation/IMPLEMENTATION_STATUS.md) |
 
-## 📁 Documentation Structure
+##  Documentation Structure
 
 ```
 docs/
@@ -77,7 +77,7 @@ docs/
     └── ROADMAP_REFACTORING.md    # Implementation plan
 ```
 
-## 📝 Documentation Standards
+##  Documentation Standards
 
 All documentation follows:
 - **Clear**: Easy to understand
@@ -86,7 +86,7 @@ All documentation follows:
 - **Current**: Always up-to-date
 - **Correct**: Tested and verified
 
-## 🔄 Updating Documentation
+##  Updating Documentation
 
 When updating code, remember to update:
 1. Relevant guide in `docs/guides/`
@@ -94,7 +94,7 @@ When updating code, remember to update:
 3. This index if adding new documents
 4. CHANGELOG.md for version releases
 
-## 📊 Documentation Statistics
+##  Documentation Statistics
 
 - **Total Documents**: 10 files
 - **Total Words**: ~11,000 words

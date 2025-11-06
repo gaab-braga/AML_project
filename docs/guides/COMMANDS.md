@@ -1,10 +1,10 @@
-# 🛠️ Common Commands Cheat Sheet
+#  Common Commands Cheat Sheet
 
 Quick reference for frequently used commands.
 
 ---
 
-## 🐍 Python Environment
+##  Python Environment
 
 ### Setup
 ```bash
@@ -38,7 +38,7 @@ pip install -r requirements.txt
 
 ---
 
-## 🧪 Testing
+##  Testing
 
 ### Run Tests
 ```bash
@@ -75,7 +75,7 @@ make test-cov
 
 ---
 
-## 🎮 CLI Commands
+##  CLI Commands
 
 ### Training
 ```bash
@@ -119,7 +119,7 @@ python -m entrypoints.cli serve --port 9000
 
 ---
 
-## 🌐 API Commands
+##  API Commands
 
 ### Start Server
 ```bash
@@ -175,7 +175,7 @@ Invoke-RestMethod -Uri http://localhost:8000/predict -Method Post -Body $body -C
 
 ---
 
-## 🐳 Docker Commands
+##  Docker Commands
 
 ### Build
 ```bash
@@ -245,7 +245,7 @@ docker-compose up -d --scale api=3
 
 ---
 
-## 📦 Batch Processing
+##  Batch Processing
 
 ```bash
 # Run batch processing
@@ -260,7 +260,7 @@ python -m entrypoints.batch --help
 
 ---
 
-## 🔍 Development
+##  Development
 
 ### Code Quality
 ```bash
@@ -288,7 +288,7 @@ python -c "from src.data.loader import load_raw_data; print('OK')"
 
 ---
 
-## 📊 Monitoring
+##  Monitoring
 
 ### View Logs
 ```bash
@@ -314,7 +314,7 @@ print(report)
 
 ---
 
-## 🗂️ File Operations
+##  File Operations
 
 ### Data
 ```bash
@@ -368,7 +368,7 @@ make clean
 
 ---
 
-## 🔧 Troubleshooting
+##  Troubleshooting
 
 ### Port Already in Use
 ```bash
@@ -403,7 +403,7 @@ $env:PYTHONPATH += ";$(pwd)"              # PowerShell
 
 ---
 
-## 📝 Git Commands
+##  Git Commands
 
 ```bash
 # Status
@@ -428,19 +428,19 @@ git diff --cached
 
 ---
 
-## 🎯 Quick Validation
+##  Quick Validation
 
 ```bash
 # Full validation pipeline
 python -m pytest tests/ -v && \
 python -m entrypoints.cli train --model-name random_forest && \
 python -m entrypoints.cli evaluate && \
-echo "✅ All validations passed!"
+echo " All validations passed!"
 ```
 
 ---
 
-## 📖 Documentation
+##  Documentation
 
 ```bash
 # View README
@@ -456,7 +456,7 @@ python -m pytest tests/ --cov=src --cov-report=html
 
 ---
 
-## 💡 Tips
+##  Tips
 
 - Use `--help` on any command to see options
 - Check logs/ directory for debugging

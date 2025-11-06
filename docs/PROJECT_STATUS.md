@@ -1,16 +1,16 @@
-# 🚀 Status do Projeto AML Detection System
+#  Status do Projeto AML Detection System
 
 **Data:** 06 de Novembro de 2025  
 **Versão:** 1.0.0  
-**Status:** ✅ **PRONTO PARA PRODUÇÃO**
+**Status:**  **PRONTO PARA PRODUÇÃO**
 
 ---
 
-## 📊 Visão Geral
+##  Visão Geral
 
 Projeto de detecção de lavagem de dinheiro (AML) com machine learning, **completamente refatorado** de notebooks Jupyter para código de produção modular.
 
-### Implementação: **98% Completa** ✅
+### Implementação: **98% Completa** 
 
 ```
 ████████████████████░ 98%
@@ -18,30 +18,30 @@ Projeto de detecção de lavagem de dinheiro (AML) com machine learning, **compl
 
 ---
 
-## ✅ Fases Implementadas (7/7)
+##  Fases Implementadas (7/7)
 
-### ✅ Fase 1: Cleanup e Organização
+###  Fase 1: Cleanup e Organização
 - [x] Estrutura modular criada
 - [x] Separação de responsabilidades
 - [x] Arquivos legados movidos para `_legacy/`
 
-### ✅ Fase 2: Refatoração de Código
+###  Fase 2: Refatoração de Código
 - [x] `src/data/` - Carregamento e preprocessamento
 - [x] `src/features/` - Engenharia de features
 - [x] `src/models/` - Treinamento e inferência
 - [x] `src/utils/` - Logging e configuração
 
-### ✅ Fase 3: CLI Entrypoint
+###  Fase 3: CLI Entrypoint
 - [x] `entrypoints/cli.py` - Interface linha de comando
 - [x] Comandos: `train`, `predict`, `monitor`
 - [x] Integração com pipeline completo
 
-### ✅ Fase 4: API & Batch Processing
+###  Fase 4: API & Batch Processing
 - [x] `entrypoints/api.py` - FastAPI REST API
 - [x] `entrypoints/batch.py` - Processamento em lote
 - [x] Endpoints: `/predict`, `/predict/batch`, `/health`
 
-### ✅ Fase 5: Testes Completos (37 testes)
+###  Fase 5: Testes Completos (37 testes)
 - [x] `tests/test_api.py` - 10 testes de API
 - [x] `tests/test_batch.py` - 2 testes de batch
 - [x] `tests/test_monitoring.py` - 8 testes de monitoring
@@ -49,13 +49,13 @@ Projeto de detecção de lavagem de dinheiro (AML) com machine learning, **compl
 - [x] `tests/test_data_preprocessing.py` - 7 testes de dados
 - [x] `tests/test_models_train.py` - 7 testes de modelos
 
-### ✅ Fase 6: Docker & Deploy
+###  Fase 6: Docker & Deploy
 - [x] `Dockerfile` - Container otimizado (Python 3.10-slim)
 - [x] `docker-compose.yml` - Orquestração multi-serviço
 - [x] `.dockerignore` - Build otimizado
 - [x] `Makefile` - Comandos comuns
 
-### ✅ Fase 7: CI/CD & Documentação
+###  Fase 7: CI/CD & Documentação
 - [x] `.github/workflows/test.yml` - CI/CD testes
 - [x] `.github/workflows/docker.yml` - CI/CD Docker
 - [x] Documentação completa em `docs/`
@@ -63,7 +63,7 @@ Projeto de detecção de lavagem de dinheiro (AML) com machine learning, **compl
 
 ---
 
-## 📁 Estrutura Final do Projeto
+##  Estrutura Final do Projeto
 
 ### Raiz (Apenas Essenciais - 12 arquivos)
 ```
@@ -103,13 +103,13 @@ docs/
 
 ### Código Modular
 ```
-entrypoints/              # 🚪 Interfaces externas
+entrypoints/              #  Interfaces externas
 ├── __init__.py
 ├── api.py               # FastAPI REST API
 ├── batch.py             # Batch processing
 └── cli.py               # Command-line interface
 
-src/                     # 💼 Business logic
+src/                     #  Business logic
 ├── __init__.py
 ├── config.py            # Gerenciamento de configuração
 ├── data/                # Carregamento e preprocessamento
@@ -118,7 +118,7 @@ src/                     # 💼 Business logic
 ├── monitoring/          # Monitoramento produção
 └── utils/               # Utilidades (logging, etc.)
 
-tests/                   # 🧪 37 testes
+tests/                   #  37 testes
 ├── test_api.py
 ├── test_batch.py
 ├── test_monitoring.py
@@ -129,57 +129,57 @@ tests/                   # 🧪 37 testes
 
 ---
 
-## 🎯 Principais Funcionalidades
+##  Principais Funcionalidades
 
 ### 1. **Pipeline ML Completo**
-- ✅ Carregamento de dados (Parquet/CSV)
-- ✅ Preprocessamento e limpeza
-- ✅ Feature engineering
-- ✅ Temporal split (80/20)
-- ✅ Treinamento (XGBoost, LightGBM, Random Forest)
-- ✅ Avaliação (ROC-AUC, PR-AUC)
-- ✅ Monitoramento em produção
+-  Carregamento de dados (Parquet/CSV)
+-  Preprocessamento e limpeza
+-  Feature engineering
+-  Temporal split (80/20)
+-  Treinamento (XGBoost, LightGBM, Random Forest)
+-  Avaliação (ROC-AUC, PR-AUC)
+-  Monitoramento em produção
 
 ### 2. **Interfaces Flexíveis**
-- ✅ **CLI**: `python -m entrypoints.cli train`
-- ✅ **API REST**: FastAPI com Swagger UI
-- ✅ **Batch**: Processamento em lote CSV
+-  **CLI**: `python -m entrypoints.cli train`
+-  **API REST**: FastAPI com Swagger UI
+-  **Batch**: Processamento em lote CSV
 
 ### 3. **Containerização**
-- ✅ Docker multi-stage build
-- ✅ docker-compose para orquestração
-- ✅ Health checks configurados
-- ✅ Volume mounts para dados/modelos/logs
+-  Docker multi-stage build
+-  docker-compose para orquestração
+-  Health checks configurados
+-  Volume mounts para dados/modelos/logs
 
 ### 4. **Testes & Qualidade**
-- ✅ 37 testes automatizados
-- ✅ Cobertura de código
-- ✅ CI/CD com GitHub Actions
-- ✅ Testes de integração end-to-end
+-  37 testes automatizados
+-  Cobertura de código
+-  CI/CD com GitHub Actions
+-  Testes de integração end-to-end
 
 ### 5. **Monitoramento**
-- ✅ Coleta de métricas (predictions, drift)
-- ✅ Sistema de alertas (critical/warning)
-- ✅ Health reports automáticos
-- ✅ Detecção de drift
+-  Coleta de métricas (predictions, drift)
+-  Sistema de alertas (critical/warning)
+-  Health reports automáticos
+-  Detecção de drift
 
 ---
 
-## 📊 Métricas de Sucesso
+##  Métricas de Sucesso
 
 | Aspecto | Métrica | Status |
 |---------|---------|--------|
-| **Testes** | 37 testes | ✅ Completo |
-| **Cobertura** | ~80% | ✅ Bom |
-| **Documentação** | 10 documentos | ✅ Completo |
-| **Containerização** | Docker + Compose | ✅ Completo |
-| **CI/CD** | 2 workflows | ✅ Completo |
-| **Modularização** | Entrypoints separados | ✅ Completo |
-| **Produção** | Ready | ✅ **Pronto** |
+| **Testes** | 37 testes |  Completo |
+| **Cobertura** | ~80% |  Bom |
+| **Documentação** | 10 documentos |  Completo |
+| **Containerização** | Docker + Compose |  Completo |
+| **CI/CD** | 2 workflows |  Completo |
+| **Modularização** | Entrypoints separados |  Completo |
+| **Produção** | Ready |  **Pronto** |
 
 ---
 
-## 🚀 Como Usar
+##  Como Usar
 
 ### Quick Start (5 minutos)
 ```bash
@@ -228,7 +228,7 @@ pytest tests/test_api.py -v
 
 ---
 
-## 🎓 Padrões Seguidos
+##  Padrões Seguidos
 
 ### ✅ GitHub Best Practices
 - README.md, LICENSE, CONTRIBUTING.md na raiz
@@ -255,7 +255,7 @@ pytest tests/test_api.py -v
 
 ---
 
-## 🔄 Histórico de Reorganização
+##  Histórico de Reorganização
 
 ### Limpeza Completa Realizada
 
@@ -285,7 +285,7 @@ Consolidados 10 markdowns:
 
 ---
 
-## 📈 Próximos Passos
+##  Próximos Passos
 
 ### Opcionais (2% restantes)
 1. **Monitoring Dashboard**
@@ -307,54 +307,54 @@ Consolidados 10 markdowns:
 
 ---
 
-## 🎉 Conquistas
+##  Conquistas
 
-### ✅ De Notebooks para Produção
+###  De Notebooks para Produção
 - **Antes:** Código espalhado em 7 notebooks
 - **Depois:** Código modular, testado, containerizado
 
-### ✅ Estrutura Profissional
+###  Estrutura Profissional
 - **Antes:** Projeto desorganizado, difícil manutenção
 - **Depois:** Estrutura de empresa, fácil navegação
 
-### ✅ Qualidade Enterprise
+###  Qualidade Enterprise
 - **Antes:** Sem testes, sem documentação
 - **Depois:** 37 testes, 10 docs, CI/CD
 
-### ✅ Pronto para Produção
+###  Pronto para Produção
 - **Antes:** "Funciona na minha máquina"
 - **Depois:** Docker, CI/CD, monitoramento
 
 ---
 
-## 📞 Recursos
+##  Recursos
 
 ### Documentação
-- 📖 [Documentação Completa](DOCUMENTATION_INDEX.md)
-- 🚀 [Quick Start](guides/QUICKSTART.md)
-- 🐳 [Deployment Guide](guides/DEPLOYMENT.md)
-- ⚡ [Commands Reference](guides/COMMANDS.md)
+-  [Documentação Completa](DOCUMENTATION_INDEX.md)
+-  [Quick Start](guides/QUICKSTART.md)
+-  [Deployment Guide](guides/DEPLOYMENT.md)
+-  [Commands Reference](guides/COMMANDS.md)
 
 ### Implementação
-- 📊 [Implementation Status](implementation/IMPLEMENTATION_STATUS.md)
-- 📝 [Implementation Summary](implementation/IMPLEMENTATION_SUMMARY.md)
-- 🗺️ [Refactoring Roadmap](implementation/ROADMAP_REFACTORING.md)
+-  [Implementation Status](implementation/IMPLEMENTATION_STATUS.md)
+-  [Implementation Summary](implementation/IMPLEMENTATION_SUMMARY.md)
+-  [Refactoring Roadmap](implementation/ROADMAP_REFACTORING.md)
 
 ### Relatórios
-- 🔄 [Reorganization Report](REORGANIZATION_REPORT.md)
+-  [Reorganization Report](REORGANIZATION_REPORT.md)
 
 ---
 
-## ⚖️ Licença
+##  Licença
 
 MIT License - Veja [LICENSE](../LICENSE) para detalhes
 
 ---
 
-## 🤝 Contribuindo
+##  Contribuindo
 
 Veja [CONTRIBUTING.md](../CONTRIBUTING.md) para diretrizes de contribuição
 
 ---
 
-**Status Final:** ✅ **PROJETO 98% COMPLETO E PRONTO PARA PRODUÇÃO** 🚀
+**Status Final: **PROJETO 98% COMPLETO E PRONTO PARA PRODUÇÃO** 

@@ -1,10 +1,10 @@
-# 📚 Documentation Index
+#  Documentation Index
 
 Complete guide to all documentation files in the AML Detection System.
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### 1. [README.md](../README.md) - START HERE
 **Purpose:** Project overview and quick start  
@@ -35,7 +35,7 @@ Complete guide to all documentation files in the AML Detection System.
 
 ---
 
-## 📊 Implementation Details
+##  Implementation Details
 
 ### 3. [ROADMAP_REFACTORING.md](implementation/ROADMAP_REFACTORING.md)
 **Purpose:** Complete implementation plan  
@@ -82,7 +82,7 @@ Complete guide to all documentation files in the AML Detection System.
 
 ---
 
-## 🚢 Deployment
+##  Deployment
 
 ### 6. [DEPLOYMENT.md](guides/DEPLOYMENT.md)
 **Purpose:** Production deployment guide  
@@ -103,7 +103,7 @@ Complete guide to all documentation files in the AML Detection System.
 
 ---
 
-## ✅ Quality Assurance
+##  Quality Assurance
 
 ### 7. [COMMANDS.md](guides/COMMANDS.md)
 **Purpose:** Complete validation checklist  
@@ -120,7 +120,7 @@ Complete guide to all documentation files in the AML Detection System.
 
 ---
 
-## 📖 User Guides
+##  User Guides
 
 ### 8. [notebooks/MIGRATION_GUIDE.md](../notebooks/MIGRATION_GUIDE.md)
 **Purpose:** Migrate from notebooks to refactored code  
@@ -163,9 +163,9 @@ Complete guide to all documentation files in the AML Detection System.
 
 ---
 
-## 📁 Quick Reference by Role
+##  Quick Reference by Role
 
-### 👨‍💼 Project Manager / Stakeholder
+###  Project Manager / Stakeholder
 Read in this order:
 1. [README.md](../README.md) - Overview
 2. [IMPLEMENTATION_SUMMARY.md](implementation/IMPLEMENTATION_SUMMARY.md) - Deliverables
@@ -175,7 +175,7 @@ Read in this order:
 
 ---
 
-### 👨‍💻 Developer (New to Project)
+###  Developer (New to Project)
 Read in this order:
 1. [README.md](../README.md) - Overview
 2. [QUICKSTART.md](guides/QUICKSTART.md) - Get running
@@ -186,7 +186,7 @@ Read in this order:
 
 ---
 
-### 🏗️ Architect / Tech Lead
+###  Architect / Tech Lead
 Read in this order:
 1. [ROADMAP_REFACTORING.md](implementation/ROADMAP_REFACTORING.md) - Architecture
 2. [IMPLEMENTATION_STATUS.md](implementation/IMPLEMENTATION_STATUS.md) - Status
@@ -196,7 +196,7 @@ Read in this order:
 
 ---
 
-### 🚀 DevOps / SRE
+###  DevOps / SRE
 Read in this order:
 1. [DEPLOYMENT.md](guides/DEPLOYMENT.md) - Deployment
 2. [README.md](../README.md) - Overview
@@ -206,7 +206,7 @@ Read in this order:
 
 ---
 
-### 🔬 Data Scientist (from Notebooks)
+###  Data Scientist (from Notebooks)
 Read in this order:
 1. [notebooks/MIGRATION_GUIDE.md](../notebooks/MIGRATION_GUIDE.md) - Migration
 2. [notebooks/EXAMPLE_Refactored_Usage.md](../notebooks/EXAMPLE_Refactored_Usage.md) - Usage
@@ -216,7 +216,7 @@ Read in this order:
 
 ---
 
-### 🧪 QA Engineer
+###  QA Engineer
 Read in this order:
 1. [tests/README.md](../tests/README.md) - Tests
 2. [COMMANDS.md](guides/COMMANDS.md) - Commands
@@ -226,7 +226,7 @@ Read in this order:
 
 ---
 
-## 📊 Documentation Stats
+##  Documentation Stats
 
 | Document | Lines | Words | Purpose |
 |----------|-------|-------|---------|
@@ -245,7 +245,7 @@ Read in this order:
 
 ---
 
-## 🔍 Finding Information Quickly
+##  Finding Information Quickly
 
 ### "How do I...?"
 
@@ -278,7 +278,7 @@ Read in this order:
 
 ---
 
-## 📝 Contributing to Documentation
+##  Contributing to Documentation
 
 When updating documentation:
 1. Keep it simple and objective
@@ -290,7 +290,7 @@ When updating documentation:
 
 ---
 
-## 🎯 Documentation Principles
+##  Documentation Principles
 
 1. **Clear** - Easy to understand
 2. **Concise** - No unnecessary words

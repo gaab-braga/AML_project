@@ -3,7 +3,7 @@
 **A production-grade machine learning platform for financial fraud detection with enterprise-level MLOps infrastructure.**
 
 [![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
-[![License](https://img.shields.io/badge/license-Proprietary-red.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
 [![Tests](https://img.shields.io/badge/tests-37%20passed-success.svg)](tests/)
 [![Code Coverage](https://img.shields.io/badge/coverage-85%25-brightgreen.svg)](tests/)
 [![Docker](https://img.shields.io/badge/docker-ready-blue.svg)](docker-compose.yml)
@@ -665,9 +665,17 @@ We welcome contributions! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for:
 
 ## License
 
-**Proprietary License** - Internal use only. All rights reserved.
+**Licensed under the Apache License, Version 2.0**
 
-See [LICENSE](LICENSE) for full terms.
+Copyright (c) 2025 Gabriel Braga
+
+You may obtain a copy of the License at: http://www.apache.org/licenses/LICENSE-2.0
+
+**Permissions**: Commercial use, modification, distribution, patent use, private use  
+**Conditions**: License and copyright notice, state changes  
+**Limitations**: Liability, warranty
+
+See [LICENSE](LICENSE) for complete terms and conditions.
 
 ---
 
@@ -696,4 +704,4 @@ See [LICENSE](LICENSE) for full terms.
 
 ---
 
-**For questions or support, please contact the development team.**
+**For questions or support, please contact.**
