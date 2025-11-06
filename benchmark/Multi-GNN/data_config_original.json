@@ -1,0 +1,16 @@
+{
+  "paths": {
+    "aml_data": "data/processed/multi-gnn",
+    "aml_accounts": "../../data/raw",
+    "aml_patterns": "../../data/raw",
+    "final_features": "../../data/processed",
+    "freq_mappings": "../../data/processed",
+    "label_encoders": "../../data/processed",
+    "scaler": "../../data/processed"
+  },
+  "model_to_save": "models",
+  "model_to_load": "models",
+  "results_dir": "results/multi-gnn",
+  "random_seed": 42,
+  "use_cuda": false
+}

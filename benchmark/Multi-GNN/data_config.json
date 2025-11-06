@@ -1,0 +1,16 @@
+{
+  "paths": {
+    "aml_data": "c:/Users/gafeb/AML_project/benchmarks/Multi-GNN/data",
+    "aml_accounts": "c:/Users/gafeb/AML_project/data/raw",
+    "aml_patterns": "c:/Users/gafeb/AML_project/data/raw",
+    "final_features": "c:/Users/gafeb/AML_project/data/processed",
+    "freq_mappings": "c:/Users/gafeb/AML_project/data/processed",
+    "label_encoders": "c:/Users/gafeb/AML_project/data/processed",
+    "scaler": "c:/Users/gafeb/AML_project/data/processed"
+  },
+  "model_to_save": "c:/Users/gafeb/AML_project/models",
+  "model_to_load": "c:/Users/gafeb/AML_project/models",
+  "results_dir": "c:/Users/gafeb/AML_project/results/multi-gnn",
+  "random_seed": 42,
+  "use_cuda": false
+}
