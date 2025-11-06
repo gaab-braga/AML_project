@@ -1,14 +1,14 @@
 {
   "model_type": "XGBoost + Isotonic Calibration",
   "performance": {
-    "roc_auc": 0.948458096920038,
-    "pr_auc": 0.3740739533331605,
-    "brier_score": 0.0012988104973144182,
-    "brier_score_uncalibrated": 0.0015326030628964845
+    "roc_auc": 0.9504420491197498,
+    "pr_auc": 0.36921143172631776,
+    "brier_score": 0.0012937264679296332,
+    "brier_score_uncalibrated": 0.0014053293687598357
   },
   "thresholds": {
-    "cost_optimal": 0.01756311745334797,
-    "f1_optimal": 0.17073170731707318
+    "cost_optimal": 0.007961783439490446,
+    "f1_optimal": 0.32
   },
   "precision_at_k": [
     {
@@ -20,37 +20,37 @@
     },
     {
       "K": 100,
-      "Precision@K": 0.97,
-      "Recall@K": 0.0674547983310153,
-      "Detected": 97,
+      "Precision@K": 0.99,
+      "Recall@K": 0.06884561891515995,
+      "Detected": 99,
       "Total Frauds": 1438
     },
     {
       "K": 200,
-      "Precision@K": 0.95,
-      "Recall@K": 0.13212795549374132,
-      "Detected": 190,
+      "Precision@K": 0.97,
+      "Recall@K": 0.1349095966620306,
+      "Detected": 194,
       "Total Frauds": 1438
     },
     {
       "K": 500,
-      "Precision@K": 0.788,
-      "Recall@K": 0.27399165507649514,
-      "Detected": 394,
+      "Precision@K": 0.79,
+      "Recall@K": 0.27468706536856746,
+      "Detected": 395,
       "Total Frauds": 1438
     },
     {
       "K": 1000,
-      "Precision@K": 0.523,
-      "Recall@K": 0.36369958275382475,
-      "Detected": 523,
+      "Precision@K": 0.528,
+      "Recall@K": 0.3671766342141864,
+      "Detected": 528,
       "Total Frauds": 1438
     },
     {
       "K": 2000,
-      "Precision@K": 0.321,
-      "Recall@K": 0.44645340751043117,
-      "Detected": 642,
+      "Precision@K": 0.3085,
+      "Recall@K": 0.4290681502086231,
+      "Detected": 617,
       "Total Frauds": 1438
     }
   ],
@@ -64,27 +64,27 @@
     },
     {
       "Model": "XGBoost (Uncalibrated)",
-      "ROC-AUC": 0.9516676522746528,
-      "PR-AUC": 0.3890110836123591,
-      "Brier Score": 0.0015326030628964845,
+      "ROC-AUC": 0.9516844722339272,
+      "PR-AUC": 0.39465676452408494,
+      "Brier Score": 0.0014053293687598357,
       "Precision@100": 0.98
     },
     {
       "Model": "XGBoost + Calibration (Ours)",
-      "ROC-AUC": 0.948458096920038,
-      "PR-AUC": 0.3740739533331605,
-      "Brier Score": 0.0012988104973144182,
-      "Precision@100": 0.97
+      "ROC-AUC": 0.9504420491197498,
+      "PR-AUC": 0.36921143172631776,
+      "Brier Score": 0.0012937264679296332,
+      "Precision@100": 0.99
     }
   ],
   "cost_model": {
     "cost_per_false_positive": 50,
     "cost_per_false_negative": 5000,
-    "minimum_total_cost": 3070700.0
+    "minimum_total_cost": 2911800.0
   },
   "production_recommendation": {
-    "recommended_threshold": 0.01756311745334797,
-    "expected_precision_at_100": 0.97,
+    "recommended_threshold": 0.007961783439490446,
+    "expected_precision_at_100": 0.99,
     "calibration_required": true
   }
 }

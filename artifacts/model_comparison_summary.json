@@ -1,0 +1,15 @@
+{
+  "analysis_date": "2025-11-06",
+  "total_models_evaluated": 4,
+  "best_model": {
+    "name": "GNN (Benchmark)",
+    "pr_auc": 0.7470482545734543,
+    "roc_auc": 0.9918000740771223,
+    "precision_100": NaN,
+    "training_time": NaN
+  },
+  "baseline_comparison": {
+    "logistic_regression_pr_auc": 0.0016646080927269823,
+    "best_vs_baseline_improvement_pct": 44778.32648642422
+  }
+}

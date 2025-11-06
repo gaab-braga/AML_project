@@ -1,0 +1,53 @@
+{
+    "confusion_matrix": {
+        "true_negatives": 1013420,
+        "false_positives": 451,
+        "false_negatives": 1175,
+        "true_positives": 622,
+        "total_predictions": 1015668
+    },
+    "performance_metrics": {
+        "sensitivity_recall": 0.34613244296048973,
+        "specificity": 0.9995551702336886,
+        "precision": 0.5796831314072693,
+        "false_positive_rate": 0.00044482976631149326,
+        "false_negative_rate": 0.6538675570395103,
+        "false_discovery_rate": 0.42031686859273065
+    },
+    "operational_metrics": {
+        "total_alerts": 1073,
+        "investigation_efficiency": 0.5796831314072693,
+        "alerts_per_fraud": 1.72508038585209
+    },
+    "confidence_statistics": {
+        "false_negatives": {
+            "mean_probability": 0.05186520144343376,
+            "median_probability": 0.0025250257458537817,
+            "std_probability": 0.1064637303352356,
+            "min_probability": 5.112355339065289e-08,
+            "max_probability": 0.4969475567340851,
+            "pct_below_0.3": 93.61702127659575
+        },
+        "false_positives": {
+            "mean_probability": 0.7273819446563721,
+            "median_probability": 0.7012007832527161,
+            "std_probability": 0.1496179699897766,
+            "min_probability": 0.5012083053588867,
+            "max_probability": 0.9999942779541016,
+            "pct_above_0.7": 50.554323725055426
+        },
+        "true_positives": {
+            "mean_probability": 0.9039663672447205,
+            "median_probability": 0.977749228477478
+        },
+        "true_negatives": {
+            "mean_probability": 0.0006116758449934423,
+            "median_probability": 1.2308030363783473e-06
+        }
+    },
+    "model_info": {
+        "model_name": "GNN (Benchmark)",
+        "best_pr_auc": 0.7470482545734543,
+        "threshold": 0.5
+    }
+}
