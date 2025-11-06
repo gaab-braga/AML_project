@@ -1,0 +1,60 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+*.egg-info/
+dist/
+build/
+
+# Jupyter
+.ipynb_checkpoints
+notebooks/.ipynb_checkpoints/
+
+# Logs
+logs/*.log
+*.log
+
+# Data (mount as volume instead)
+data/raw/*
+!data/raw/.gitkeep
+
+# Models (mount as volume for persistence)
+models/*.pkl
+models/*.pt
+!models/.gitkeep
+
+# Artifacts
+artifacts/*.json
+artifacts/*.csv
+!artifacts/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Documentation
+*.md
+!README.md
+
+# Tests
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Benchmarks
+benchmark/

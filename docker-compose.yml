@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  # API Service
+  api:
+    build: .
+    container_name: aml_api
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./logs:/app/logs
+      - ./artifacts:/app/artifacts
+    environment:
+      - PYTHONUNBUFFERED=1
+      - LOG_LEVEL=INFO
+    command: uvicorn entrypoints.api:app --host 0.0.0.0 --port 8000 --reload
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Batch Processing Service (optional)
+  batch:
+    build: .
+    container_name: aml_batch
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./logs:/app/logs
+      - ./artifacts:/app/artifacts
+    environment:
+      - PYTHONUNBUFFERED=1
+      - LOG_LEVEL=INFO
+    command: python -m entrypoints.batch --input /app/data/processed/features_with_patterns.parquet
+    restart: "no"
+    depends_on:
+      - api
+
+volumes:
+  data:
+  models:
+  logs:
+  artifacts:

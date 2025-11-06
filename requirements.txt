@@ -39,7 +39,7 @@ schedule>=1.2.0               # Job scheduling
 # === DEVELOPMENT ===
 jupyter>=1.0.0                # Notebook environment
 ipywidgets>=8.1.0             # Interactive widgets
-click>=8.1.0                  # Command-line interface framework
+typer[all]>=0.9.0             # Modern CLI framework
 rich>=13.7.0                  # Rich text and beautiful formatting
 streamlit>=1.29.0             # Web dashboard framework
 
